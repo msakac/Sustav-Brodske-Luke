@@ -59,10 +59,6 @@ namespace msakac_zadaca_1.Naredbe.Slozene
                                     danUpita = datumZauzetosti.DayOfWeek;
                                 }
                             }
-                            if(stavka.VrijemeOd > stavka.VrijemeDo){
-                                Console.WriteLine("manji");
-                                datumZauzetosti.AddDays(-1);
-                            }
                             string ispis = String.Format(formatIspisa, "", "", "",
                             datumZauzetosti.ToString("dd.MM.yyyy."), "Zauzet od", stavka.VrijemeOd, stavka.VrijemeDo, "");
 
