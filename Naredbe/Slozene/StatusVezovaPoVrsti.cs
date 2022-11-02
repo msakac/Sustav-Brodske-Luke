@@ -38,34 +38,59 @@ namespace msakac_zadaca_1.Naredbe.Slozene
                         ((stavka.VrijemeOd <= vrijemeOd && stavka.VrijemeDo >= vrijemeOd && stavka.VrijemeDo <= vrijemeDo) ||
                         (stavka.VrijemeOd >= vrijemeOd && stavka.VrijemeDo <= vrijemeDo) ||
                         (stavka.VrijemeOd <= vrijemeDo && stavka.VrijemeDo >= vrijemeDo && stavka.VrijemeOd >= vrijemeOd)) &&
-                         stavka.DaniUTjednu.Exists(dan => dan >= danTjednaOd && dan <= danTjednaDo)
+                         stavka.DaniUTjednu.Exists(dan => dan >= danTjednaOd - 1 && dan <= danTjednaDo + 1)
                         );
                     if (stavkeVeza.Count > 0)
                     {
                         IspisiRedak(vez);
                         foreach (StavkaRasporeda stavka in stavkeVeza)
                         {
-                            List<DayOfWeek> listaDana = stavka.DaniUTjednu.FindAll(dan => dan >= danTjednaOd-1 && dan <= danTjednaDo+1);
+                            List<DayOfWeek> listaDana = stavka.DaniUTjednu.FindAll(dan => dan >= danTjednaOd - 1 && dan <= danTjednaDo + 1);
 
-                            //tu nekaj jebe z tim datumom zauzetosti jer ga ne resetiram svaki put
-                            DateTime datumZauzetosti = datumVrijemeOd;
-                            foreach (DayOfWeek dan in listaDana)
+                            DateTime DatumVrijemeStavkeOd = datumVrijemeOd.Subtract(new TimeSpan(1, 0, 0, 0)).Date;
+                            DatumVrijemeStavkeOd = DatumVrijemeStavkeOd.Add(new TimeSpan(stavka.VrijemeOd.Hour, stavka.VrijemeOd.Minute, stavka.VrijemeOd.Second));
+
+                            DateTime DatumVrijemeStavkeDo = datumVrijemeDo.Subtract(new TimeSpan(1, 0, 0, 0)).Date;
+                            DatumVrijemeStavkeDo = DatumVrijemeStavkeDo.Add(new TimeSpan(stavka.VrijemeDo.Hour, stavka.VrijemeDo.Minute, stavka.VrijemeDo.Second));
+                            var razlika = DatumVrijemeStavkeDo - DatumVrijemeStavkeOd;
+                            for (int i = 0; i <= listaDana.Count + 1; i++)
                             {
-                                datumZauzetosti = datumVrijemeOd;
-                                DayOfWeek danUpita = datumZauzetosti.DayOfWeek;
-                                while (dan != danUpita)
+                                razlika = DatumVrijemeStavkeDo - DatumVrijemeStavkeOd;
+                                if (((DatumVrijemeStavkeOd <= datumVrijemeOd && DatumVrijemeStavkeDo >= datumVrijemeOd && DatumVrijemeStavkeDo <= datumVrijemeDo) ||
+                                   (DatumVrijemeStavkeOd >= datumVrijemeOd && DatumVrijemeStavkeDo <= datumVrijemeDo) ||
+                                   (DatumVrijemeStavkeOd <= datumVrijemeDo && DatumVrijemeStavkeDo >= datumVrijemeDo &&
+                                   DatumVrijemeStavkeOd >= datumVrijemeOd)) && razlika.Days < 1
+                                   && listaDana.Exists(dan => dan == DatumVrijemeStavkeOd.DayOfWeek)
+                                   && DatumVrijemeStavkeDo > DatumVrijemeStavkeOd)
                                 {
-                                    datumZauzetosti = datumZauzetosti.AddDays(1);
-                                    danUpita = datumZauzetosti.DayOfWeek;
+                                    break;
+                                }
+                                else
+                                {
+                                    if (i % 2 == 0)
+                                    {
+                                        DatumVrijemeStavkeDo = DatumVrijemeStavkeDo.Add(new TimeSpan(1, 0, 0, 0));
+                                    }
+                                    else
+                                    {
+                                        DatumVrijemeStavkeOd = DatumVrijemeStavkeOd.Add(new TimeSpan(1, 0, 0, 0));
+
+                                    }
                                 }
                             }
                             string ispis = String.Format(formatIspisa, "", "", "",
-                            datumZauzetosti.ToString("dd.MM.yyyy."), "Zauzet od", stavka.VrijemeOd, stavka.VrijemeDo, "");
-
-                            IspisPoruke.Greska(ispis);
+                            DatumVrijemeStavkeOd, DatumVrijemeStavkeDo, stavka.VrijemeOd, stavka.VrijemeDo, "");
+                            if (((DatumVrijemeStavkeOd <= datumVrijemeOd && DatumVrijemeStavkeDo >= datumVrijemeOd && DatumVrijemeStavkeDo <= datumVrijemeDo) ||
+                                   (DatumVrijemeStavkeOd >= datumVrijemeOd && DatumVrijemeStavkeDo <= datumVrijemeDo) ||
+                                   (DatumVrijemeStavkeOd <= datumVrijemeDo && DatumVrijemeStavkeDo >= datumVrijemeDo &&
+                                   DatumVrijemeStavkeOd >= datumVrijemeOd)) && razlika.Days < 1
+                                   && listaDana.Exists(dan => dan == DatumVrijemeStavkeOd.DayOfWeek)
+                                   && DatumVrijemeStavkeDo > DatumVrijemeStavkeOd)
+                            {
+                                IspisPoruke.Greska(ispis);
+                            }
                         }
                     }
-                    //zvadim van dan u tjednu i zvadim z trenutkog datuma od i trenutni datum povecam i opet vadim van dan dok ne budu isti
                 }
 
             }
@@ -79,5 +104,3 @@ namespace msakac_zadaca_1.Naredbe.Slozene
         }
     }
 }
-//Za svaki vez iz rasporeda zvaditi sve vezove kojima odgovara isti id, vrsta koju trazim i vrijeme
-//Za vrijeme moram znati koji su moji dani od do 
