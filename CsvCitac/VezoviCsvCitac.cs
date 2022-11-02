@@ -1,0 +1,61 @@
+﻿using msakac_zadaca_1.Aplikacija;
+using msakac_zadaca_1.Modeli;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace msakac_zadaca_1.CsvCitac
+{
+    public class VezoviCsvCitac : ICsvCitac
+    {
+        public void citajPodatke(string datoteka)
+        {
+            Console.WriteLine($"\nVezovi | Učitavam datoteku: {datoteka}...");
+            var trenutniDirektorij = System.AppContext.BaseDirectory;
+            BrodskaLuka brodskaLuka = BrodskaLuka.Instanca();
+            try
+            {
+                using StreamReader citac = new StreamReader(trenutniDirektorij + datoteka);
+                string prviRedak = citac.ReadLine()!;
+                int brojAtributa = prviRedak.Split(';').Count();
+                int brojPropertija = typeof(Vez).GetProperties().Length;
+                if (brojAtributa != brojPropertija)
+                {
+                    IspisPoruke.FatalnaGreska("Broj redaka u datoteci i atributa u klasi su razliciti!");
+                }
+                string redak;
+                int ucitaniPodaci = 0;
+                while ((redak = citac.ReadLine()!) != null)
+                {
+                    try
+                    {
+                        string[]? podaci = redak?.Split(';');
+                        int id = int.Parse(podaci![0]);
+                        string oznakaVeza = podaci[1];
+                        VrstaVeza vrstaVeze = brodskaLuka.DohvatiVrstuVeza(podaci[2]);
+                        int cijenaVezaPoSatu = int.Parse(podaci![3]);
+                        int maxDuljina = int.Parse(podaci[4]);
+                        int maxSirina = int.Parse(podaci[5]);
+                        int maxDubina = int.Parse(podaci[6]);
+
+                        Vez vez = new Vez(id, oznakaVeza, vrstaVeze, cijenaVezaPoSatu, maxDuljina, maxSirina, maxDubina);
+                        vez.DodajUListuVezova();
+                        ucitaniPodaci++;
+                    }
+                    catch (Exception e)
+                    {
+                        Greska.Instanca.IspisiGresku(e, redak);
+                    }
+
+                }
+                IspisPoruke.Uspjeh($"|===== Učitano {ucitaniPodaci.ToString()} ispravnih redaka iz datoteke {datoteka} ");
+            }
+            catch
+            {
+                IspisPoruke.FatalnaGreska($"Datoteku {datoteka} nije moguće pročitati ili ne postoji u direktoriju!");
+            }
+        }
+    }
+}
