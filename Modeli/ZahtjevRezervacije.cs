@@ -65,7 +65,7 @@ namespace msakac_zadaca_1.Modeli
                     break;
                 }
             }
-            if (!rezerviran) throw new Exception($"Nije moguće rezervirati brod {this.IdBrod} od {this.DatumVrijemeOd} do {DatumVrijemeDo} ");
+            if (!rezerviran) throw new Exception($"Nije moguće rezervirati vez za brod {this.IdBrod} od {this.DatumVrijemeOd} do {DatumVrijemeDo} ");
 
         }
 

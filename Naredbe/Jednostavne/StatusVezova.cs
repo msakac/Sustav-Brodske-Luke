@@ -13,9 +13,9 @@ namespace msakac_zadaca_1.Naredbe.Jednostavne
         public override void IzvrsiNaredbu()
         {
             BrodskaLuka brodskaLuka = BrodskaLuka.Instanca();
-            string prviRedak = String.Format("\n|{0,-3}|{1,-11}|{2,-5}|{3,-11}|{4,-10}|{5,-10}|{6,-11}|{7,-6}|", "ID", "Oznaka Veza", "Vrsta",
+            string prviRedak = String.Format("\n|{0,-3}|{1,-11}|{2,-5}|{3,-11}|{4,-10}|{5,-10}|{6,-11}|{7,-8}|", "ID", "Oznaka Veza", "Vrsta",
                 "Cijena po h", "Max dubina", "Max sirina", "Max duljina", "Status");
-            IspisPoruke.Uspjeh(prviRedak + "\n|---|-----------|-----|-----------|----------|----------|-----------|------|");
+            IspisPoruke.Uspjeh(prviRedak + "\n|---|-----------|-----|-----------|----------|----------|-----------|--------|");
 
             DateTime datumVrijeme = VirtualniSat.Instanca.Dohvati();
             DayOfWeek danTjedna = datumVrijeme.DayOfWeek;
@@ -34,16 +34,16 @@ namespace msakac_zadaca_1.Naredbe.Jednostavne
 
         private void IspisiRedak(Vez vez, int index)
         {
-            string status = "S";
+            string status = "Slobodan";
             if (index >= 0)
             {
-                status = "Z";
+                status = "Zauzet";
             }
-            string ispis = String.Format("|{0,-3}|{1,-11}|{2,-5}|{3,-11}|{4,-10}|{5,-10}|{6,-11}|{7,-6}|", vez.Id, vez.OznakaVeza, vez.Vrsta.oznakaVeza,
+            string ispis = String.Format("|{0,-3}|{1,-11}|{2,-5}|{3,-11}|{4,-10}|{5,-10}|{6,-11}|{7,-8}|", vez.Id, vez.OznakaVeza, vez.Vrsta.oznakaVeza,
             vez.CijenaVezaPoSatu + " kn", vez.MaksimalnaDubina + " m", vez.MaksimalnaSirina + " m", vez.MaksimalnaDuljina + " m", status);
             if (index >= 0)
             {
-                status = "Z";
+                status = "Zauzet";
                 IspisPoruke.Greska(ispis);
             }
             else
