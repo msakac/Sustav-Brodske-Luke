@@ -57,6 +57,10 @@ namespace msakac_zadaca_1.Modeli
             {
                 throw new Exception($"Nije moguce kreirati novi 'Ostali vez' jer u luki već postoji maksimalni broj  ostalih vezova ({brojVezovaUListi})");
             }
+            if (this.MaksimalnaDubina >= brodskaLuka.luka!.DubinaLuke)
+            {
+                throw new Exception($"Vez ima preveliku dubinu ({this.MaksimalnaDubina}) za luku dubine '{brodskaLuka.luka!.DubinaLuke}'");
+            }
 
             brodskaLuka.listaVezova.Add(this);
         }

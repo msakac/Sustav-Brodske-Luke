@@ -26,6 +26,7 @@ namespace msakac_zadaca_1.Aplikacija
         public List<Vez> listaVezova = new List<Vez>();
         public List<VrstaVeza> listaVrsteVezove = new List<VrstaVeza>();
         public List<StavkaRasporeda> listaStavkiRasporeda = new List<StavkaRasporeda>();
+        public List<Rezervacija> listaRezervacija = new List<Rezervacija>();
 
         private Luka? _luka;
         public Luka? luka

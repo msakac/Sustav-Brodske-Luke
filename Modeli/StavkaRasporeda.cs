@@ -67,6 +67,10 @@ namespace msakac_zadaca_1.Modeli
             {
                 throw new Exception($"Brod sa vrstom '{brod.Vrsta}' ne može biti vezan na '{vez.Vrsta.nazivVeza}' vez");
             }
+            if(brod.Sirina >= vez.MaksimalnaSirina || brod.Duljina >= vez.MaksimalnaDuljina || brod.Gaz >= vez.MaksimalnaDubina){
+                throw new Exception($"Dimenzije broda {brod.Id} (S-{brod.Sirina};D-{brod.Duljina};G-{brod.Gaz})"+
+                $"ne odgovaraju vezu '{vez.OznakaVeza} (S-{vez.MaksimalnaSirina};D-{vez.MaksimalnaDuljina};G-{vez.MaksimalnaDubina})'");
+            }
 
             int postojiURasporedu = brodskaLuka.listaStavkiRasporeda.FindIndex(stavka =>
             stavka.IdBrod == this.IdBrod &&

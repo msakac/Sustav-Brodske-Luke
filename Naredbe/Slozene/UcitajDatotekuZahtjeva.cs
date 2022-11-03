@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using msakac_zadaca_1.CsvCitac;
 
 namespace msakac_zadaca_1.Naredbe.Slozene
 {
@@ -11,7 +12,13 @@ namespace msakac_zadaca_1.Naredbe.Slozene
     {
         public override void IzvrsiNaredbu(string naredba)
         {
-            IspisPoruke.Uspjeh("Izvrsena naredba UCITAJ DATOTEKU ZAHTJEVA");
+            string[]? argumenti = naredba.Split(' ');
+            CsvCitacCreator objekt = new CsvCitacConcreteCreator();
+            ICsvCitac csvCitac = objekt.KreirajCitac("rezervacije");
+            csvCitac.citajPodatke(argumenti[1]);
+
+            BrodskaLuka brodskaLuka = BrodskaLuka.Instanca();
+            
         }
     }
 }
