@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace msakac_zadaca_1.CsvCitac
 {
-    public class VezoviCsvCitac : ICsvCitac
+    public class VezoviCsvCitac : AbstractCsvCitac
     {
-        public void citajPodatke(string datoteka)
+        public override void citajPodatke(string datoteka)
         {
             Console.WriteLine($"\nVezovi | Učitavam datoteku: {datoteka}...");
             var trenutniDirektorij = System.AppContext.BaseDirectory;

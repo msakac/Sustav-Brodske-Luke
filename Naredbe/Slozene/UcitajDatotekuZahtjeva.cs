@@ -14,7 +14,7 @@ namespace msakac_zadaca_1.Naredbe.Slozene
         {
             string[]? argumenti = naredba.Split(' ');
             CsvCitacCreator objekt = new CsvCitacConcreteCreator();
-            ICsvCitac csvCitac = objekt.KreirajCitac("rezervacije");
+            AbstractCsvCitac csvCitac = objekt.KreirajCitac("rezervacije");
             csvCitac.citajPodatke(argumenti[1]);
 
             BrodskaLuka brodskaLuka = BrodskaLuka.Instanca();

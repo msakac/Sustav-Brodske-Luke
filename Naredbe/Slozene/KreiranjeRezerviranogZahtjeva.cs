@@ -14,11 +14,12 @@ namespace msakac_zadaca_1.Naredbe.Slozene
     {
         public override void IzvrsiNaredbu(string naredba)
         {
+            VirtualniSatProxy proxy = new VirtualniSatProxy();
             string[]? argumenti = naredba.Split(' ');
             int idBrod = int.Parse(argumenti[1]);
             BrodskaLuka brodskaLuka = BrodskaLuka.Instanca();
             Brod? brod = brodskaLuka.listaBrodova.Find(brod => brod.Id == idBrod);
-            DateTime virtualniDatumVrijeme = VirtualniSat.Instanca.Dohvati();
+            DateTime virtualniDatumVrijeme = proxy.Dohvati();
             DayOfWeek virtualniDanTjedna = virtualniDatumVrijeme.DayOfWeek;
             TimeOnly virtualnoVrijeme = TimeOnly.Parse(virtualniDatumVrijeme.ToString("HH:mm"));
 

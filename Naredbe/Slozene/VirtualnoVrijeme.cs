@@ -11,11 +11,12 @@ namespace msakac_zadaca_1.Naredbe.Slozene
     {
         public override void IzvrsiNaredbu(string naredba)
         {
+            VirtualniSatProxy proxy = new VirtualniSatProxy();
             string[]? argumenti = naredba.Split(' ');
             string novoVirtualnoVrijeme = argumenti[1] + " " + argumenti[2];
             DateTime novoVrijeme = DateTime.Parse(novoVirtualnoVrijeme);
-            VirtualniSat.Instanca.Postavi(novoVrijeme);
-            IspisPoruke.Uspjeh($"Novo vrijeme virtualnog sata: {VirtualniSat.Instanca.Dohvati()}");
+            proxy.Postavi(novoVrijeme);
+            IspisPoruke.Uspjeh($"Novo vrijeme virtualnog sata: {proxy.Dohvati()}");
         }
     }
 }

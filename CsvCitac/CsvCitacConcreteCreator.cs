@@ -8,7 +8,7 @@ namespace msakac_zadaca_1.CsvCitac
 {
     public class CsvCitacConcreteCreator : CsvCitacCreator
     {
-        public override ICsvCitac KreirajCitac(string tip)
+        public override AbstractCsvCitac KreirajCitac(string tip)
         {
             switch (tip)
             {

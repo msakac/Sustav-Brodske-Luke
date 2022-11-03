@@ -27,6 +27,7 @@ namespace msakac_zadaca_1.Aplikacija
         public List<VrstaVeza> listaVrsteVezove = new List<VrstaVeza>();
         public List<StavkaRasporeda> listaStavkiRasporeda = new List<StavkaRasporeda>();
         public List<Rezervacija> listaRezervacija = new List<Rezervacija>();
+        private VirtualniSatProxy proxy = new VirtualniSatProxy();
 
         private Luka? _luka;
         public Luka? luka
@@ -63,13 +64,13 @@ namespace msakac_zadaca_1.Aplikacija
                     if (group.Value != "")
                     {
                         CsvCitacCreator objekt = new CsvCitacConcreteCreator();
-                        ICsvCitac csvCitac = objekt.KreirajCitac(group.Key);
+                        AbstractCsvCitac csvCitac = objekt.KreirajCitac(group.Key);
                         csvCitac.citajPodatke(group.Value);
                     }
 
                 }
-                VirtualniSat.Instanca.Postavi(luka!.VirtualnoVrijeme);
-                IspisPoruke.Uspjeh($"\nPodaci inicijalizirani! Virtualni sat postavljen na: {VirtualniSat.Instanca.Dohvati().ToString()}");
+                proxy.Postavi(luka!.VirtualnoVrijeme);
+                IspisPoruke.Uspjeh($"\nPodaci inicijalizirani! Virtualni sat postavljen na: {proxy.Dohvati().ToString()}");
                 PodaciInicijalizirani = true;
                 return;
             }
@@ -92,7 +93,7 @@ namespace msakac_zadaca_1.Aplikacija
                         }
                         else
                         {
-                            VirtualniSat.Instanca.IspisiVirtualnoVrijeme();
+                            proxy.IspisiVirtualnoVrijeme();
                             factory = new JednostavnaNaredbaFactory();
                             AbstractJednostavnaNaredba naredba = factory.KreirajJednostavnuNaredbu(group.Key);
                             naredba.IzvrsiNaredbu();
@@ -101,7 +102,7 @@ namespace msakac_zadaca_1.Aplikacija
                     }
                     else
                     {
-                        VirtualniSat.Instanca.IspisiVirtualnoVrijeme();
+                        proxy.IspisiVirtualnoVrijeme();
                         factory = new SlozenaNaredbaFactory();
                         AbstractSlozenaNaredba naredba = factory.KreirajSlozenuNaredbu(group.Key);
                         naredba.IzvrsiNaredbu(group.Value);

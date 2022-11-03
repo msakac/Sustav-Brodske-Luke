@@ -20,7 +20,9 @@ class Zadaca1
 
         BrodskaLuka brodskaLuka = BrodskaLuka.Instanca();
         brodskaLuka.InicijalizirajPodatke(listaRegexGrupaIVrijednosti);
-        Timer t = new Timer(VirtualniSat.Instanca.Tick!, null, 0, 1000);
+
+        VirtualniSatProxy proxy = new VirtualniSatProxy();
+        Timer t = new Timer(proxy.Tick!, null, 0, 1000);
 
         while (true)
         {

@@ -13,12 +13,13 @@ namespace msakac_zadaca_1.Naredbe.Slozene
     {
         public override void IzvrsiNaredbu(string naredba)
         {
+            VirtualniSatProxy proxy = new VirtualniSatProxy();
             string[]? argumenti = naredba.Split(' ');
             int idBrod = int.Parse(argumenti[1]);
             int brojSati = int.Parse(argumenti[2]);
             BrodskaLuka brodskaLuka = BrodskaLuka.Instanca();
             Brod? brod = brodskaLuka.listaBrodova.Find(brod => brod.Id == idBrod);
-            DateTime DatumVrijemeOd = VirtualniSat.Instanca.Dohvati();
+            DateTime DatumVrijemeOd = proxy.Dohvati();
             DateTime DatumVrijemeDo = DatumVrijemeOd.AddHours(brojSati);
 
             DayOfWeek virtualniDanTjedna = DatumVrijemeOd.DayOfWeek;
@@ -45,7 +46,24 @@ namespace msakac_zadaca_1.Naredbe.Slozene
                 IspisPoruke.Greska($"Brod sa ID-om {idBrod} već ima rezerviran vez ({rezervacija.IdVez}) od {rezervacija.DatumVrijemeOd} do {rezervacija.DatumVrijemeDo} ");
                 return;
             }
+            KreirajZahtjev(brodskaLuka, brod, idBrod, virtualniDanTjedna, VrijemeOd, VrijemeDo, DatumVrijemeOd, DatumVrijemeDo);
+        }
+        private Boolean provjeriInterval(DateTime stavkaVrijemeOd, DateTime stavkaVrijemeDo, DateTime zeljenoVrijemePrivezaOd, DateTime zeljenoVrijemePrivezaDo)
+        {
+            if ((stavkaVrijemeOd < zeljenoVrijemePrivezaOd && stavkaVrijemeDo > zeljenoVrijemePrivezaDo) ||
+            (stavkaVrijemeOd > zeljenoVrijemePrivezaOd && stavkaVrijemeOd < zeljenoVrijemePrivezaDo) ||
+            (stavkaVrijemeDo > zeljenoVrijemePrivezaOd && stavkaVrijemeDo < zeljenoVrijemePrivezaDo) ||
+            (stavkaVrijemeOd > zeljenoVrijemePrivezaOd && stavkaVrijemeDo > zeljenoVrijemePrivezaOd
+            && stavkaVrijemeOd < zeljenoVrijemePrivezaDo && stavkaVrijemeDo < zeljenoVrijemePrivezaDo))
+            {
+                return true;
+            }
+            return false;
+        }
 
+        private void KreirajZahtjev(BrodskaLuka brodskaLuka, Brod brod, int idBrod, DayOfWeek virtualniDanTjedna,
+        TimeOnly VrijemeOd, TimeOnly VrijemeDo, DateTime DatumVrijemeOd, DateTime DatumVrijemeDo)
+        {
             List<Vez> listaMogucihVezova = brodskaLuka.listaVezova.FindAll(vez => vez.Vrsta.oznakaVrsteBroda!.Contains(brod.Vrsta)
             && brod.Gaz <= vez.MaksimalnaDubina
             && brod.Sirina <= vez.MaksimalnaSirina
@@ -71,19 +89,6 @@ namespace msakac_zadaca_1.Naredbe.Slozene
                 }
             }
             if (!privezan) throw new Exception($"Nije moguće privezati brod {idBrod} od {DatumVrijemeOd} do {DatumVrijemeDo} ");
-
-        }
-        private Boolean provjeriInterval(DateTime stavkaVrijemeOd, DateTime stavkaVrijemeDo, DateTime zeljenoVrijemePrivezaOd, DateTime zeljenoVrijemePrivezaDo)
-        {
-            if ((stavkaVrijemeOd < zeljenoVrijemePrivezaOd && stavkaVrijemeDo > zeljenoVrijemePrivezaDo) ||
-            (stavkaVrijemeOd > zeljenoVrijemePrivezaOd && stavkaVrijemeOd < zeljenoVrijemePrivezaDo) ||
-            (stavkaVrijemeDo > zeljenoVrijemePrivezaOd && stavkaVrijemeDo < zeljenoVrijemePrivezaDo) ||
-            (stavkaVrijemeOd > zeljenoVrijemePrivezaOd && stavkaVrijemeDo > zeljenoVrijemePrivezaOd
-            && stavkaVrijemeOd < zeljenoVrijemePrivezaDo && stavkaVrijemeDo < zeljenoVrijemePrivezaDo))
-            {
-                return true;
-            }
-            return false;
         }
     }
 }

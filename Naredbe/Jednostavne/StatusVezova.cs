@@ -17,7 +17,8 @@ namespace msakac_zadaca_1.Naredbe.Jednostavne
                 "Cijena po h", "Max dubina", "Max sirina", "Max duljina", "Status");
             IspisPoruke.Uspjeh(prviRedak + "\n|---|-----------|-----|-----------|----------|----------|-----------|--------|");
 
-            DateTime datumVrijeme = VirtualniSat.Instanca.Dohvati();
+            VirtualniSatProxy proxy = new VirtualniSatProxy();
+            DateTime datumVrijeme = proxy.Dohvati();
             DayOfWeek danTjedna = datumVrijeme.DayOfWeek;
             TimeOnly vrijeme = TimeOnly.Parse(datumVrijeme.ToString("HH:mm"));
 

@@ -8,9 +8,9 @@ using msakac_zadaca_1.Modeli;
 
 namespace msakac_zadaca_1.CsvCitac
 {
-    public class RasporedCsvCitac : ICsvCitac
+    public class RasporedCsvCitac : AbstractCsvCitac
     {
-        public void citajPodatke(string datoteka)
+        public override void citajPodatke(string datoteka)
         {
             Console.WriteLine($"\nRaspored | Učitavam datoteku: {datoteka}...");
             var trenutniDirektorij = System.AppContext.BaseDirectory;

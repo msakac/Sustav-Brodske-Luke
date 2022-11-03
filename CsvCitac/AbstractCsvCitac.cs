@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace msakac_zadaca_1.CsvCitac
 {
-    public interface ICsvCitac
+    public abstract class AbstractCsvCitac
     {
-        void citajPodatke(string datoteka);
+        public abstract void citajPodatke(string datoteka);
     }
 }
