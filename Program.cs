@@ -11,7 +11,7 @@ class Zadaca1
         @"(-b (?<brodovi>[0-9a-zA-Z_-]{3,}\.csv)\s?){1}){3}()|(-r (?<raspored>[0-9a-zA-Z_-]{3,}\.csv)\s?){0,1}){1,2}$)";
         Regex regex = new Regex(regexIzraz);
         Match match = regex.Match(naredba);
-        if (!regex.IsMatch(naredba))
+        if (!regex.IsMatch(naredba) || naredba.Length == 0)
         {
             IspisPoruke.FatalnaGreska("Uneseni argumenti naredbe nisu ispravni");
         }

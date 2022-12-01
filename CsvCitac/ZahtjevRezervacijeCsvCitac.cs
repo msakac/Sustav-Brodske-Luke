@@ -13,7 +13,7 @@ namespace msakac_zadaca_1.CsvCitac
         public override void citajPodatke(string datoteka)
         {
             Console.WriteLine($"\nZahtjevi Rezervacije | Učitavam datoteku: {datoteka}...");
-            var trenutniDirektorij = System.AppContext.BaseDirectory;
+            var trenutniDirektorij = Directory.GetCurrentDirectory() + "\\";
             BrodskaLuka brodskaLuka = BrodskaLuka.Instanca();
             try
             {

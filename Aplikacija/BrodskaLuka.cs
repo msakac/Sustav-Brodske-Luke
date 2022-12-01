@@ -119,7 +119,6 @@ namespace msakac_zadaca_1.Aplikacija
         }
         private void kreirajVrsteVezova()
         {
-            Console.WriteLine("\nKreiram vrste vezova...");
             List<OznakaVrsteBroda> vrsteBrodova = new List<OznakaVrsteBroda>() {
                 OznakaVrsteBroda.TR,
                 OznakaVrsteBroda.KA,
@@ -140,7 +139,6 @@ namespace msakac_zadaca_1.Aplikacija
                 OznakaVrsteBroda.RO
             };
             listaVrsteVezove.Add(new VrstaVeza("Ostali", OznakaVrsteVeza.OS, vrsteBrodova));
-            IspisPoruke.Uspjeh($"Kreirane su {listaVrsteVezove.Count} vrste veza ");
         }
         public VrstaVeza DohvatiVrstuVeza(string vrsta)
         {

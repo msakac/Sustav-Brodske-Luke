@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace msakac_zadaca_1.Aplikacija
 {
-    public class VirtualniSat
+    public class VirtualniSat : AbstractVirtualniSat
     {
         private static VirtualniSat? instanca;
         private DateTime vrijeme = new DateTime();
@@ -22,16 +22,16 @@ namespace msakac_zadaca_1.Aplikacija
             }
         }
 
-        public void Postavi(DateTime virtualnoVrijeme) {
+        public override void  Postavi(DateTime virtualnoVrijeme) {
             vrijeme = new DateTime(virtualnoVrijeme.Year, virtualnoVrijeme.Month, virtualnoVrijeme.Day, virtualnoVrijeme.Hour, virtualnoVrijeme.Minute, virtualnoVrijeme.Second);
         }
-        public void Tick(Object o){
+        public override void  Tick(Object o){
             vrijeme = vrijeme.AddSeconds(1);
         }
-        public DateTime Dohvati(){
+        public override DateTime Dohvati(){
             return this.vrijeme;
         }
-        public void IspisiVirtualnoVrijeme(){
+        public override void IspisiVirtualnoVrijeme(){
             Console.WriteLine($"Virtualni sat: {this.vrijeme}");
         }
     }
