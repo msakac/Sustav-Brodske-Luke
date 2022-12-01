@@ -13,11 +13,10 @@ namespace msakac_zadaca_1.CsvCitac
         public override void citajPodatke(string datoteka)
         {
             Console.WriteLine($"\nRaspored | Učitavam datoteku: {datoteka}...");
-            var trenutniDirektorij = Directory.GetCurrentDirectory() + "\\";
             BrodskaLuka brodskaLuka = BrodskaLuka.Instanca();
             try
             {
-                using StreamReader citac = new StreamReader(trenutniDirektorij + datoteka);
+                using StreamReader citac = new StreamReader(brodskaLuka.trenutniDirektorij + datoteka);
                 string prviRedak = citac.ReadLine()!;
                 int brojAtributa = prviRedak.Split(';').Count();
                 int brojPropertija = typeof(StavkaRasporeda).GetProperties().Length;
