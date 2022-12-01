@@ -22,6 +22,12 @@ namespace msakac_zadaca_1.CsvCitac
                     return new BrodoviCsvCitac();
                 case "rezervacije":
                     return new ZahtjevRezervacijeCsvCitac();
+                case "kanali":
+                    return new KanaliCsvCitac();
+                case "molovi":
+                    return new MoloviCscCitac();
+                case "molvez":
+                    return new MolVezoviCsvCitac();
                 default:
                     throw new ApplicationException($"Dohvat podataka {tip} nije moguc!");
             }

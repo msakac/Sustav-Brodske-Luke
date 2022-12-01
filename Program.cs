@@ -7,8 +7,8 @@ class Zadaca1
     static public void Main(String[] args)
     {
         string? naredba = KreirajNaredbu(args);
-        string regexIzraz = @"(^(?:(?:(-l (?<luke>[0-9a-zA-Z_-]{3,}\.csv)\s?){1}()|(-v (?<vezovi>[0-9a-zA-Z_-]{3,}\.csv)\s?){1}()|" +
-        @"(-b (?<brodovi>[0-9a-zA-Z_-]{3,}\.csv)\s?){1}){3}()|(-r (?<raspored>[0-9a-zA-Z_-]{3,}\.csv)\s?){0,1}){1,2}$)";
+        string regexIzraz = @"(^(?:(?:(-l (?<luke>[0-9a-zA-Z_-]{3,}\.csv)\s?){1}()|(-m (?<molovi>[0-9a-zA-Z_-]{3,}\.csv)\s?){1}()|(-k (?<kanali>[0-9a-zA-Z_-]{3,}\.csv)\s?){1}()|(-v (?<vezovi>[0-9a-zA-Z_-]{3,}\.csv)\s?){1}()|(-mv (?<molvez>[0-9a-zA-Z_-]{3,}\.csv)\s?){1}()|" +
+        @"(-b (?<brodovi>[0-9a-zA-Z_-]{3,}\.csv)\s?){1}){6}()|(-r (?<raspored>[0-9a-zA-Z_-]{3,}\.csv)\s?){0,1}){1,2}$)";
         Regex regex = new Regex(regexIzraz);
         Match match = regex.Match(naredba);
         if (!regex.IsMatch(naredba) || naredba.Length == 0)
