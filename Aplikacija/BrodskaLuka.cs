@@ -21,11 +21,13 @@ namespace msakac_zadaca_1.Aplikacija
     {
         //Singleton property
         private static readonly BrodskaLuka _instance = new BrodskaLuka();
+        public readonly string trenutniDirektorij = Directory.GetCurrentDirectory() + "\\";
         private bool PodaciInicijalizirani = false;
         public List<Brod> listaBrodova = new List<Brod>();
         public List<Vez> listaVezova = new List<Vez>();
         public List<VrstaVeza> listaVrsteVezove = new List<VrstaVeza>();
-        public readonly string trenutniDirektorij = Directory.GetCurrentDirectory() + "\\";
+        public List<Mol> listaMolova = new List<Mol>();
+        public List<Kanal> listaKanala = new List<Kanal>();
         public List<StavkaRasporeda> listaStavkiRasporeda = new List<StavkaRasporeda>();
         public List<Rezervacija> listaRezervacija = new List<Rezervacija>();
         private VirtualniSatProxy proxy = new VirtualniSatProxy();

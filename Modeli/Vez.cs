@@ -17,6 +17,7 @@ namespace msakac_zadaca_1.Modeli
     {
         public int Id { get; set; }
         public string? OznakaVeza { get; set; }
+        public Mol? Mol { get; set; }
         public VrstaVeza Vrsta { get; set; }
         public int CijenaVezaPoSatu { get; set; }
         public int MaksimalnaDuljina { get; set; }

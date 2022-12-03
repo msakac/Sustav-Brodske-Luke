@@ -19,7 +19,7 @@ namespace msakac_zadaca_1.CsvCitac
                 using StreamReader citac = new StreamReader(brodskaLuka.trenutniDirektorij + datoteka);
                 string prviRedak = citac.ReadLine()!;
                 int brojAtributa = prviRedak.Split(';').Count();
-                int brojPropertija = typeof(Vez).GetProperties().Length;
+                int brojPropertija = typeof(Vez).GetProperties().Length - 1;
                 if (brojAtributa != brojPropertija)
                 {
                     IspisPoruke.FatalnaGreska("Broj redaka u datoteci i atributa u klasi su razliciti!");

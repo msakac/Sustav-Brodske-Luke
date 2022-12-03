@@ -29,10 +29,10 @@ namespace msakac_zadaca_1.Aplikacija
             {
                 porukaGreske = "Format nekog argumenta u redku je neispravan!";
             }
-            string poruka = $"Greska {brojacGreski}: {porukaGreske}.";
+            string poruka = $"Greska {brojacGreski}: {porukaGreske}";
             if (redak != null)
             {
-                poruka = $"Greska {brojacGreski}: {porukaGreske}. Redak: {redak}";
+                poruka = $"Greska {brojacGreski}: {porukaGreske} Redak: {redak}";
             }
 
             IspisPoruke.Greska(poruka);
