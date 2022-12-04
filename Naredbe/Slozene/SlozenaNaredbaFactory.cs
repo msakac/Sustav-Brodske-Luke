@@ -11,6 +11,7 @@ namespace msakac_zadaca_1.Naredbe.Slozene
     {
         public override AbstractSlozenaNaredba KreirajSlozenuNaredbu(string tip)
         {
+
             switch (tip)
             {
                 case "kreiranje_rezerviranog_zahtjev":
@@ -23,6 +24,12 @@ namespace msakac_zadaca_1.Naredbe.Slozene
                     return new UcitajDatotekuZahtjeva();
                 case "vrijeme":
                     return new VirtualnoVrijeme();
+                case "komunikacija_brod_kanal":
+                    return new KomunikacijaBrodKanal();
+                case "format_ispisa_tablica":
+                    return new FormatIspisaTablica();
+                case "zauzeti_vezovi_prema_vrsti":
+                    return new ZauzetiVezoviPremaVrsti();
                 default:
                     throw new Exception($"Slozena naredba {tip} nije moguca!");
             }

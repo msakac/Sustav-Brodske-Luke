@@ -32,6 +32,7 @@ namespace msakac_zadaca_1.Modeli
         public int KapacitetPutnika { get; set; }
         public int KapacitetOsobnihVozila { get; set; }
         public int KapacitetTereta { get; set; }
+        public Kanal? aktivniKanal { get; set; }
 
         public Brod(int id, string oznakaBroda, string naziv, OznakaVrsteBroda vrsta, double duljina, double sirina, double gaz, double maksimalnaBrzina, int kapacitetPutnika, int kapacitetOsobnihVozila, int kapacitetTereta)
         {

@@ -40,7 +40,7 @@ namespace msakac_zadaca_1.Naredbe.Slozene
             }
 
             Rezervacija? rezervacija = brodskaLuka.listaRezervacija.Find(rezervacija => rezervacija.IdBrod == brod.Id
-            && rezervacija.DatumVrijemeOd <= DatumVrijemeOd && rezervacija.DatumVrijemeDo >= DatumVrijemeOd);
+            && rezervacija.DatumVrijemeOd <= DatumVrijemeOd && rezervacija.DatumVrijemeDo >= DatumVrijemeDo);
             if (rezervacija != null)
             {
                 IspisPoruke.Greska($"Brod sa ID-om {idBrod} već ima rezerviran vez ({rezervacija.IdVez}) od {rezervacija.DatumVrijemeOd} do {rezervacija.DatumVrijemeDo} ");
@@ -84,6 +84,7 @@ namespace msakac_zadaca_1.Naredbe.Slozene
                 if (zauzetURasporedu == -1 && zauzetURezervaciji == -1)
                 {
                     IspisPoruke.Uspjeh($"Brod {idBrod} trazi dozvolu za privez na {vez.Id} od {DatumVrijemeOd} do {DatumVrijemeDo} ");
+                    brodskaLuka.listaRezervacija.Add(new Rezervacija(brod.Id, vez.Id, DatumVrijemeOd, DatumVrijemeDo));
                     privezan = true;
                     break;
                 }

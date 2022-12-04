@@ -86,31 +86,36 @@ namespace msakac_zadaca_1.Aplikacija
             bool prekiniRad = false;
             foreach (KeyValuePair<string, string> group in listaRegexGrupaIVrijednosti)
             {
-                if (group.Value != "")
-                {
-                    if (group.Key == "status_vezova" || group.Key == "prekid_rada")
-                    {
-                        if (group.Key == "prekid_rada")
-                        {
-                            prekiniRad = true;
-                        }
-                        else
-                        {
-                            proxy.IspisiVirtualnoVrijeme();
-                            factory = new JednostavnaNaredbaFactory();
-                            AbstractJednostavnaNaredba naredba = factory.KreirajJednostavnuNaredbu(group.Key);
-                            naredba.IzvrsiNaredbu();
-                        }
+                // Ako je neka naredba prazna, preskoci
+                if (group.Value == "") continue;
 
-                    }
-                    else
-                    {
-                        proxy.IspisiVirtualnoVrijeme();
-                        factory = new SlozenaNaredbaFactory();
-                        AbstractSlozenaNaredba naredba = factory.KreirajSlozenuNaredbu(group.Key);
-                        naredba.IzvrsiNaredbu(group.Value);
-                    }
+                // Ako je naredba za prekid rada, postavi prekiniRad na true
+                if (group.Key == "prekid_rada" && group.Value != "")
+                {
+                    prekiniRad = true;
+                    continue;
                 }
+
+                proxy.IspisiVirtualnoVrijeme();
+
+                // Ako je jednostavna naredba, stvori jednostavnu naredbu
+                if (group.Key == "status_vezova")
+                {
+                    factory = new JednostavnaNaredbaFactory();
+                    AbstractJednostavnaNaredba naredba = factory.KreirajJednostavnuNaredbu(group.Key);
+                    naredba.IzvrsiNaredbu();
+
+                }
+                
+                // Ako je slozena naredba, stvori slozenu naredbu
+                else
+                {
+                    
+                    factory = new SlozenaNaredbaFactory();
+                    AbstractSlozenaNaredba naredba = factory.KreirajSlozenuNaredbu(group.Key);
+                    naredba.IzvrsiNaredbu(group.Value);
+                }
+
             }
 
             if (prekiniRad)
