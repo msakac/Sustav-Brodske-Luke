@@ -18,47 +18,30 @@ namespace msakac_zadaca_1.Naredbe.Slozene
             string[]? argumenti = naredba.Split(' ');
             int idBrod = int.Parse(argumenti[1]);
             BrodskaLuka brodskaLuka = BrodskaLuka.Instanca();
-            Brod? brod = brodskaLuka.listaBrodova.Find(brod => brod.Id == idBrod);
-            DateTime virtualniDatumVrijeme = proxy.Dohvati();
-            DayOfWeek virtualniDanTjedna = virtualniDatumVrijeme.DayOfWeek;
-            TimeOnly virtualnoVrijeme = TimeOnly.Parse(virtualniDatumVrijeme.ToString("HH:mm"));
+            DateTime DatumVrijemeOd = proxy.Dohvati();
 
+            Brod? brod = brodskaLuka.listaBrodova.Find(brod => brod.Id == idBrod);
+            //provjera da li brod postoji
             if (brod == null)
             {
                 throw new Exception($"Brod sa ID-om {brod} ne postoji u listi brodova!");
             }
 
-            StavkaRasporeda? stavka = brodskaLuka.listaStavkiRasporeda.Find(stavka => stavka.IdBrod == brod.Id && stavka.DaniUTjednu.Contains(virtualniDanTjedna));
-            if (stavka != null)
+            if(brod.aktivniKanal == null)
             {
-                if (stavka.VrijemeOd <= virtualnoVrijeme && stavka.VrijemeDo >= virtualnoVrijeme)
-                {
-                    IspisPoruke.Uspjeh($"Brod {brod.Id} trazi dozvolu za privez broda na rezervirani vez {stavka.IdVez} u vremenu {virtualniDatumVrijeme.ToString("dd.mm.yyyy. hh:mm:ss")}");
-                }
-                else
-                {
-                    IspisPoruke.Greska($"Odbijem zahtjev broda {brod.Id} za privez na vez {stavka.IdVez} u vremenu {virtualniDatumVrijeme.ToString("dd.mm.yyyy. hh:mm:ss")}");
-
-                }
-                return;
+                throw new Exception($"Brod sa ID-om {brod.Id} nije spojen na neki kanal!");
             }
+            //dohvacam sve termine koji su zauzeti u tom periodu
+            List<Rezervacija> listaSvihRezervacijaUPeriodu = Pomagala.DohvatiSveTermineZauzetostiUPeriodu(DatumVrijemeOd.AddDays(-1), DatumVrijemeOd.AddDays(1));
 
-            Rezervacija? rezervacija = brodskaLuka.listaRezervacija.Find(rezervacija => rezervacija.IdBrod == brod.Id);
-            if (rezervacija != null)
+            //provjera da li je brod vec rezerviran u tom periodu
+            Rezervacija? rp = listaSvihRezervacijaUPeriodu.Find(r => r.IdBrod == brod.Id
+            && r.DatumVrijemeOd <= DatumVrijemeOd && r.DatumVrijemeDo >= DatumVrijemeOd);
+            if (rp == null)
             {
-                if (rezervacija.DatumVrijemeOd <= virtualniDatumVrijeme && rezervacija.DatumVrijemeDo >= virtualniDatumVrijeme)
-                {
-                    IspisPoruke.Uspjeh($"Brod {brod.Id} trazi dozvolu za privez broda na rezervirani vez {rezervacija.IdVez} u vremenu {virtualniDatumVrijeme.ToString("dd.mm.yyyy. hh:mm:ss")}");
-                }
-                else
-                {
-                    IspisPoruke.Greska($"Odbijem zahtjev broda {brod.Id} za privez na vez {rezervacija.IdVez} u vremenu {virtualniDatumVrijeme.ToString("dd.mm.yyyy. hh:mm:ss")}");
-                }
-                return;
+                throw new Exception($"Brod sa ID-om {brod.Id} koji trazi dozvolu za privez nema rezerviran vez u virtualnom vremenu {DatumVrijemeOd}");
             }
-
-            throw new Exception($"Brod sa ID-om {brod.Id} nema odobrenu rezervaciju niti fiksan raspored!");
-
+            IspisPoruke.Uspjeh($"Brod sa ID-om {brod.Id} trazi dozvolu za privez broda na rezervirani vez {rp!.IdVez} ({rp.DatumVrijemeOd}-{rp.DatumVrijemeDo}) u virtualnom vremenu {DatumVrijemeOd}");
         }
     }
 }

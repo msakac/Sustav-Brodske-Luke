@@ -18,17 +18,12 @@ namespace msakac_zadaca_1.Naredbe.Jednostavne
             IspisPoruke.Uspjeh(prviRedak + "\n|---|-----------|-----|-----------|----------|----------|-----------|--------|");
 
             VirtualniSatProxy proxy = new VirtualniSatProxy();
-            DateTime datumVrijeme = proxy.Dohvati();
-            DayOfWeek danTjedna = datumVrijeme.DayOfWeek;
-            TimeOnly vrijeme = TimeOnly.Parse(datumVrijeme.ToString("HH:mm"));
+            DateTime datumVrijemeOd = proxy.Dohvati();
+            List<Rezervacija> listaSvihRezervacijaUPeriodu = Pomagala.DohvatiSveTermineZauzetostiUPeriodu(datumVrijemeOd.AddDays(-1), datumVrijemeOd.AddDays(1));
 
             foreach (Vez vez in brodskaLuka.listaVezova)
             {
-                int index = brodskaLuka.listaStavkiRasporeda.FindIndex(
-                    stavka => stavka.IdVez == vez.Id &&
-                    stavka.DaniUTjednu.Exists(dan => dan == danTjedna) &&
-                    stavka.VrijemeOd <= vrijeme &&
-                    stavka.VrijemeDo >= vrijeme);
+                int index = listaSvihRezervacijaUPeriodu.FindIndex(r => r.IdVez == vez.Id && r.DatumVrijemeOd <= datumVrijemeOd && r.DatumVrijemeDo >= datumVrijemeOd);
                 IspisiRedak(vez, index);
             }
         }
