@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using msakac_zadaca_1.Aplikacija;
+﻿using msakac_zadaca_1.Aplikacija;
 
 namespace msakac_zadaca_1.Modeli
 {

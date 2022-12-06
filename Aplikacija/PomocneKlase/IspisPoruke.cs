@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace msakac_zadaca_1.Aplikacija
+﻿namespace msakac_zadaca_1.Aplikacija
 {
     static class IspisPoruke
     {

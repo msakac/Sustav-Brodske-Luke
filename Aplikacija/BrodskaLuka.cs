@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Text.RegularExpressions;
-using msakac_zadaca_1.Modeli;
-using System.IO;
+﻿using msakac_zadaca_1.Modeli;
 using msakac_zadaca_1.CsvCitac;
 using msakac_zadaca_1.Naredbe.Jednostavne;
 using msakac_zadaca_1.Naredbe.Slozene;

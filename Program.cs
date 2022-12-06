@@ -1,5 +1,4 @@
 ﻿using msakac_zadaca_1.Aplikacija;
-using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 
 class Zadaca1
