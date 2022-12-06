@@ -17,8 +17,14 @@ namespace msakac_zadaca_1.Modeli
             DatumVrijemeDo = datumVrijemeDo;
         }
 
-        public override void Accept(IVisitor visitor){
-
+        public override Vez? Accept(IVisitor visitor)
+        {
+            Vez? v = visitor.Visit(this);
+            if (v != null)
+            {
+                return v;
+            }
+            return null;
         }
 
     }

@@ -25,7 +25,7 @@ namespace msakac_zadaca_1.Naredbe.Jednostavne
                 listaPodatakaZaIspis.Add(podaciIspisa);
             }
             string nazivIspisa = $"Pregled statusa vezova u trenutku {datumVrijemeOd}";
-            string[] naziviStupaca = { "ID", "Oznaka Veza", "Vrsta",
+            string[] naziviStupaca = { "ID Vez", "Oznaka Veza", "Vrsta",
                 "Cijena po h", "Max dubina", "Max sirina", "Max duljina", "Status" };
             Tablica.Instanca.IspisiTablicu(nazivIspisa, naziviStupaca, listaPodatakaZaIspis, 12);
         }
