@@ -1,6 +1,8 @@
+using msakac_zadaca_1.Visitor;
+
 namespace msakac_zadaca_1.Modeli
 {
-    public class Rezervacija
+    public class Rezervacija : Element
     {
         public int IdVez { get; set; }
         public int IdBrod { get; set; }
@@ -13,6 +15,10 @@ namespace msakac_zadaca_1.Modeli
             IdBrod = idBrod;
             DatumVrijemeOd = datumVrijemeOd;
             DatumVrijemeDo = datumVrijemeDo;
+        }
+
+        public override void Accept(IVisitor visitor){
+
         }
 
     }
