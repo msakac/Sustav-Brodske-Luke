@@ -24,6 +24,8 @@ namespace msakac_zadaca_1.Naredbe.Slozene
                     return new FormatIspisaTablica();
                 case "zauzeti_vezovi_prema_vrsti":
                     return new ZauzetiVezoviPremaVrsti();
+                case "ispis_podataka":
+                    return new IspisPodataka();
                 default:
                     throw new Exception($"Slozena naredba {tip} nije moguca!");
             }
