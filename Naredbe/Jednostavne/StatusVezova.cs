@@ -13,40 +13,26 @@ namespace msakac_zadaca_1.Naredbe.Jednostavne
         public override void IzvrsiNaredbu()
         {
             BrodskaLuka brodskaLuka = BrodskaLuka.Instanca();
-            string prviRedak = String.Format("\n|{0,-3}|{1,-11}|{2,-5}|{3,-11}|{4,-10}|{5,-10}|{6,-11}|{7,-8}|", "ID", "Oznaka Veza", "Vrsta",
-                "Cijena po h", "Max dubina", "Max sirina", "Max duljina", "Status");
-            IspisPoruke.Uspjeh(prviRedak + "\n|---|-----------|-----|-----------|----------|----------|-----------|--------|");
-
             VirtualniSatProxy proxy = new VirtualniSatProxy();
             DateTime datumVrijemeOd = proxy.Dohvati();
             List<Rezervacija> listaSvihRezervacijaUPeriodu = Pomagala.DohvatiSveTermineZauzetostiUPeriodu(datumVrijemeOd.AddDays(-1), datumVrijemeOd.AddDays(1));
-
+            List<string[]> listaPodatakaZaIspis = new List<string[]>();
             foreach (Vez vez in brodskaLuka.listaVezova)
             {
                 int index = listaSvihRezervacijaUPeriodu.FindIndex(r => r.IdVez == vez.Id && r.DatumVrijemeOd <= datumVrijemeOd && r.DatumVrijemeDo >= datumVrijemeOd);
-                IspisiRedak(vez, index);
+                string status = "Slobodan";
+                if (index >= 0)
+                {
+                    status = "Zauzet";
+                }
+                string[] podaciIspisa = { vez.Id.ToString(), vez.OznakaVeza!, vez.Vrsta.oznakaVeza.ToString(), vez.CijenaVezaPoSatu.ToString(), vez.MaksimalnaDubina.ToString(),
+                    vez.MaksimalnaSirina.ToString(), vez.MaksimalnaDuljina.ToString(), status};
+                listaPodatakaZaIspis.Add(podaciIspisa);
             }
-        }
-
-        private void IspisiRedak(Vez vez, int index)
-        {
-            string status = "Slobodan";
-            if (index >= 0)
-            {
-                status = "Zauzet";
-            }
-            string ispis = String.Format("|{0,-3}|{1,-11}|{2,-5}|{3,-11}|{4,-10}|{5,-10}|{6,-11}|{7,-8}|", vez.Id, vez.OznakaVeza, vez.Vrsta.oznakaVeza,
-            vez.CijenaVezaPoSatu + " kn", vez.MaksimalnaDubina + " m", vez.MaksimalnaSirina + " m", vez.MaksimalnaDuljina + " m", status);
-            if (index >= 0)
-            {
-                status = "Zauzet";
-                IspisPoruke.Greska(ispis);
-            }
-            else
-            {
-                IspisPoruke.Uspjeh(ispis);
-            }
-
+            string nazivIspisa = $"Pregled statusa vezova u trenutku {datumVrijemeOd}";
+            string[] naziviStupaca = { "ID", "Oznaka Veza", "Vrsta",
+                "Cijena po h", "Max dubina", "Max sirina", "Max duljina", "Status" };
+            Tablica.Instanca.IspisiTablicu(nazivIspisa, naziviStupaca, listaPodatakaZaIspis, 12);
         }
     }
 }

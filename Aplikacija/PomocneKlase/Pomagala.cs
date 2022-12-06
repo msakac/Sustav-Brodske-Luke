@@ -46,11 +46,25 @@ namespace msakac_zadaca_1.Aplikacija
                 foreach (StavkaRasporeda stavka in brodskaLuka.listaStavkiRasporeda)
                 {
                     // if (stavka.DaniUTjednu.Contains(danTjednaPom) && Postoji24hPreklapanje(stavka.VrijemeOd, stavka.VrijemeDo, zeljenoVrijemeOd, zeljenoVrijemeDo))
+                    DateTime stavkaOd = zeljenoOdPom.Date.AddHours(stavka.VrijemeOd.Hour).AddMinutes(stavka.VrijemeOd.Minute);
+                    DateTime stavkaDo = new DateTime();
                     if (stavka.DaniUTjednu.Contains(danTjednaPom))
                     {
                         TimeSpan trajanjeRezervacije = stavka.VrijemeOd - stavka.VrijemeDo;
-                        DateTime stavkaOd = zeljenoOdPom.Date.AddHours(stavka.VrijemeOd.Hour).AddMinutes(stavka.VrijemeOd.Minute);
-                        DateTime stavkaDo = stavkaOd.AddMinutes(trajanjeRezervacije.Minutes);
+                        if (stavka.VrijemeDo > stavka.VrijemeOd)
+                        {
+                            trajanjeRezervacije = stavka.VrijemeDo - stavka.VrijemeOd;
+                            stavkaDo = stavkaOd.Add(trajanjeRezervacije);
+                        }
+                        else
+                        {
+                            TimeOnly pomocno = TimeOnly.Parse("00:00");
+                            trajanjeRezervacije = pomocno - stavka.VrijemeOd;
+                            stavkaDo = stavkaOd.Add(trajanjeRezervacije).AddHours(stavka.VrijemeDo.Hour).AddMinutes(stavka.VrijemeDo.Minute);
+                        }
+
+                        
+                        // DateTime stavkaDo = stavkaOd.Add(trajanjeRezervacije).AddHours(stavka.VrijemeDo.Hour).AddMinutes(stavka.VrijemeDo.Minute);
                         listaRezervacija.Add(new Rezervacija(stavka.IdVez, stavka.IdBrod, stavkaOd, stavkaDo));
                     }
                 }

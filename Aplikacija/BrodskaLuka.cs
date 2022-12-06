@@ -30,6 +30,7 @@ namespace msakac_zadaca_1.Aplikacija
         public List<Kanal> listaKanala = new List<Kanal>();
         public List<StavkaRasporeda> listaStavkiRasporeda = new List<StavkaRasporeda>();
         public List<Rezervacija> listaRezervacija = new List<Rezervacija>();
+        public List<StavkaDnevnika> listaStavkiDnevnika = new List<StavkaDnevnika>();
         private VirtualniSatProxy proxy = new VirtualniSatProxy();
 
         private Luka? _luka;
@@ -156,14 +157,6 @@ namespace msakac_zadaca_1.Aplikacija
                 throw new Exception(message: $"Vrsta veza '{vrsta}' ne postoji u listi!");
             }
             return veza;
-        }
-        public void DodajUListuVezova(Vez vez)
-        {
-            listaVezova.Add(vez);
-        }
-        public List<Vez> DohvatiSveVezove()
-        {
-            return listaVezova;
         }
     }
 }

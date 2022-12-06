@@ -29,5 +29,12 @@ namespace msakac_zadaca_1.Aplikacija
             Console.ResetColor();
             Environment.Exit(0);
         }
+
+        public static void PorukaKanala(string poruka)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine(poruka);
+            Console.ResetColor();
+        }
     }
 }

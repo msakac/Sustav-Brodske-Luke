@@ -46,17 +46,17 @@ namespace msakac_zadaca_1.Modeli
             // provjeri da li je brod vec spojen na kanal
             if (brod.aktivniKanal != null)
             {
-                throw new Exception($"Brod sa ID-om {brod.Id} je vec spojen na kanal sa ID-om {brod.aktivniKanal.Id}");
+                throw new Exception($"Brod sa ID-om {brod.Id} je vec spojen na kanal sa frekvencijom {brod.aktivniKanal.Frekvecija}");
             }
             // provjeri da li kanal ima slobodnih mjesta
             if (this.SpojeniBrodovi.Count >= this.MaksimalanBroj)
             {
-                throw new Exception($"Kanal sa ID-om {this.Id} je popunjen");
+                throw new Exception($"Kanal frekvencije {this.Frekvecija} je popunjen");
             }
             // ako je sve ok, spoji brod na kanal
             this.SpojeniBrodovi.Add(brod);
             brodskaLuka.listaBrodova.First(b => b.Id == brod.Id).aktivniKanal = this;
-            IspisPoruke.Uspjeh($"Brod sa ID-om {brod.Id} je uspjesno spojen na kanal sa ID-om {this.Id}");
+            IspisPoruke.Uspjeh($"Brod sa ID-om {brod.Id} je uspjesno spojen na kanal sa frekvencijom {this.Frekvecija}");
         }
 
         public void OdjaviBrodSaKanala(Brod brod)
@@ -69,12 +69,27 @@ namespace msakac_zadaca_1.Modeli
             Brod? b = this.SpojeniBrodovi.Find(br => br.Id == brod.Id);
             if (b == null)
             {
-                throw new Exception($"Brod sa ID-om {brod.Id} nije spojen na kanal sa ID-om {this.Id}");
+                throw new Exception($"Brod sa ID-om {brod.Id} nije spojen na kanal sa frekvencijom {this.Frekvecija}");
             }
             // ako postoji, makni ga iz liste i azuriraj u listi brodova
             this.SpojeniBrodovi.Remove(b);
             brodskaLuka.listaBrodova.First(b => b.Id == brod.Id).aktivniKanal = null;
-            IspisPoruke.Uspjeh($"Brod sa ID-om {brod.Id} je odjavljen sa kanala sa ID-om {this.Id}");
+            IspisPoruke.Uspjeh($"Brod sa ID-om {brod.Id} je odjavljen sa kanala sa frekvencijom {this.Frekvecija}");
+        }
+
+        public void PosaljiPorukuBrodovima(string poruka, Brod brod)
+        {
+            if (this.SpojeniBrodovi == null)
+            {
+                this.SpojeniBrodovi = new List<Brod>();
+            }
+            foreach (Brod b in this.SpojeniBrodovi)
+            {
+                if (b.Id != brod.Id)
+                {
+                    IspisPoruke.PorukaKanala($"Kanal {this.Frekvecija}, Brod {b.Id} prima poruku: {poruka}");
+                }
+            }
         }
     }
 }

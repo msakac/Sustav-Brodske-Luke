@@ -10,7 +10,7 @@ namespace msakac_zadaca_1.Naredbe.Slozene
 {
     public class StatusVezovaPoVrsti : AbstractSlozenaNaredba
     {
-        private string formatIspisa = "|{0,-3}|{1,-11}|{2,-5}|{3,-11}|{4,-10}|{5,-10}|{6,-11}|{7,-6}|";
+        private string formatIspisa = "{0,-4}|{1,-3}|{2,-8}|{3,-5}|{4,-21}|{5,-21}|";
         public override void IzvrsiNaredbu(string naredba)
         {
             BrodskaLuka brodskaLuka = BrodskaLuka.Instanca();
@@ -23,84 +23,24 @@ namespace msakac_zadaca_1.Naredbe.Slozene
             DateTime datumVrijemeOd = DateTime.Parse(stringDatumVrijemeOd);
             DateTime datumVrijemeDo = DateTime.Parse(stringDatumVrijemeDo);
 
-            VrstaVeza vrstaVeza = brodskaLuka.DohvatiVrstuVeza(argumenti[1]);
-            DayOfWeek danTjednaOd = datumVrijemeOd.DayOfWeek;
-            TimeOnly vrijemeOd = TimeOnly.Parse(datumVrijemeOd.ToString("HH:mm"));
-            DayOfWeek danTjednaDo = datumVrijemeDo.DayOfWeek;
-            TimeOnly vrijemeDo = TimeOnly.Parse(datumVrijemeDo.ToString("HH:mm"));
-
-            foreach (Vez vez in brodskaLuka.listaVezova)
+            VrstaVeza vrstaVeza = brodskaLuka.DohvatiVrstuVeza(veza);
+            List<Rezervacija> listaSvihRezervacijaUPeriodu = Pomagala.DohvatiSveTermineZauzetostiUPeriodu(datumVrijemeOd.AddDays(-1), datumVrijemeDo.AddDays(1));
+            List<string[]> listaPodatakaZaIspis = new List<string[]>();
+            foreach (Rezervacija r in listaSvihRezervacijaUPeriodu)
             {
-                if (vez.Vrsta == vrstaVeza)
+                if (Pomagala.PostojiVremenskoPreklapanja(r.DatumVrijemeOd, r.DatumVrijemeDo, datumVrijemeOd, datumVrijemeDo))
                 {
-                    List<StavkaRasporeda> stavkeVeza = brodskaLuka.listaStavkiRasporeda.FindAll(
-                        stavka => stavka.IdVez == vez.Id &&
-                        ((stavka.VrijemeOd <= vrijemeOd && stavka.VrijemeDo >= vrijemeOd && stavka.VrijemeDo <= vrijemeDo) ||
-                        (stavka.VrijemeOd >= vrijemeOd && stavka.VrijemeDo <= vrijemeDo) ||
-                        (stavka.VrijemeOd <= vrijemeDo && stavka.VrijemeDo >= vrijemeDo && stavka.VrijemeOd >= vrijemeOd)) &&
-                         stavka.DaniUTjednu.Exists(dan => dan >= danTjednaOd - 1 && dan <= danTjednaDo + 1)
-                        );
-                    if (stavkeVeza.Count > 0)
+                    Vez vez = brodskaLuka.listaVezova.Find(v => v.Id == r.IdVez)!;
+                    if (vez.Vrsta == vrstaVeza)
                     {
-                        IspisiRedak(vez);
-                        foreach (StavkaRasporeda stavka in stavkeVeza)
-                        {
-                            List<DayOfWeek> listaDana = stavka.DaniUTjednu.FindAll(dan => dan >= danTjednaOd - 1 && dan <= danTjednaDo + 1);
-
-                            DateTime DatumVrijemeStavkeOd = datumVrijemeOd.Subtract(new TimeSpan(1, 0, 0, 0)).Date;
-                            DatumVrijemeStavkeOd = DatumVrijemeStavkeOd.Add(new TimeSpan(stavka.VrijemeOd.Hour, stavka.VrijemeOd.Minute, stavka.VrijemeOd.Second));
-
-                            DateTime DatumVrijemeStavkeDo = datumVrijemeDo.Subtract(new TimeSpan(1, 0, 0, 0)).Date;
-                            DatumVrijemeStavkeDo = DatumVrijemeStavkeDo.Add(new TimeSpan(stavka.VrijemeDo.Hour, stavka.VrijemeDo.Minute, stavka.VrijemeDo.Second));
-                            var razlika = DatumVrijemeStavkeDo - DatumVrijemeStavkeOd;
-                            for (int i = 0; i <= listaDana.Count + 1; i++)
-                            {
-                                razlika = DatumVrijemeStavkeDo - DatumVrijemeStavkeOd;
-                                if (((DatumVrijemeStavkeOd <= datumVrijemeOd && DatumVrijemeStavkeDo >= datumVrijemeOd && DatumVrijemeStavkeDo <= datumVrijemeDo) ||
-                                   (DatumVrijemeStavkeOd >= datumVrijemeOd && DatumVrijemeStavkeDo <= datumVrijemeDo) ||
-                                   (DatumVrijemeStavkeOd <= datumVrijemeDo && DatumVrijemeStavkeDo >= datumVrijemeDo &&
-                                   DatumVrijemeStavkeOd >= datumVrijemeOd)) && razlika.Days < 1
-                                   && listaDana.Exists(dan => dan == DatumVrijemeStavkeOd.DayOfWeek)
-                                   && DatumVrijemeStavkeDo > DatumVrijemeStavkeOd)
-                                {
-                                    break;
-                                }
-                                else
-                                {
-                                    if (i % 2 == 0)
-                                    {
-                                        DatumVrijemeStavkeDo = DatumVrijemeStavkeDo.Add(new TimeSpan(1, 0, 0, 0));
-                                    }
-                                    else
-                                    {
-                                        DatumVrijemeStavkeOd = DatumVrijemeStavkeOd.Add(new TimeSpan(1, 0, 0, 0));
-
-                                    }
-                                }
-                            }
-                            string ispis = String.Format(formatIspisa, "", "", "",
-                            DatumVrijemeStavkeOd, DatumVrijemeStavkeDo, stavka.VrijemeOd, stavka.VrijemeDo, "");
-                            if (((DatumVrijemeStavkeOd <= datumVrijemeOd && DatumVrijemeStavkeDo >= datumVrijemeOd && DatumVrijemeStavkeDo <= datumVrijemeDo) ||
-                                   (DatumVrijemeStavkeOd >= datumVrijemeOd && DatumVrijemeStavkeDo <= datumVrijemeDo) ||
-                                   (DatumVrijemeStavkeOd <= datumVrijemeDo && DatumVrijemeStavkeDo >= datumVrijemeDo &&
-                                   DatumVrijemeStavkeOd >= datumVrijemeOd)) && razlika.Days < 1
-                                   && listaDana.Exists(dan => dan == DatumVrijemeStavkeOd.DayOfWeek)
-                                   && DatumVrijemeStavkeDo > DatumVrijemeStavkeOd)
-                            {
-                                IspisPoruke.Greska(ispis);
-                            }
-                        }
+                        string[] podaciIspisa = { vez.Id.ToString(), vez.OznakaVeza!, vez.Vrsta.oznakaVeza.ToString(), r.DatumVrijemeOd.ToString(), r.DatumVrijemeDo.ToString() };
+                        listaPodatakaZaIspis.Add(podaciIspisa);
                     }
                 }
-
             }
-        }
-        private void IspisiRedak(Vez vez)
-        {
-            string ispis = String.Format(formatIspisa, vez.Id, vez.OznakaVeza, vez.Vrsta.oznakaVeza,
-            vez.CijenaVezaPoSatu + " kn", vez.MaksimalnaDubina + " m", vez.MaksimalnaSirina + " m", vez.MaksimalnaDuljina + " m", "Z");
-            IspisPoruke.Uspjeh(ispis);
-
+            string nazivIspisa = "Lista zauzetih vezova po vrsti u terminu od " + datumVrijemeOd + " do " + datumVrijemeDo;
+            string[] naziviStupaca = { "Vez", "Oznaka", "Vrsta", "Rezerviran Od", "Rezerviran Do" };
+            Tablica.Instanca.IspisiTablicu(nazivIspisa, naziviStupaca, listaPodatakaZaIspis);
         }
     }
 }

@@ -11,7 +11,13 @@ namespace msakac_zadaca_1.Naredbe.Slozene
     {
         public override void IzvrsiNaredbu(string naredba)
         {
-            Console.WriteLine("Format ispisa tablica");
+            string[]? argumenti = naredba.Split(' ');
+            argumenti = argumenti.Skip(1).ToArray();
+            if(argumenti.Count() == 0){
+                throw new Exception($"Naredba '{naredba}' nije ispravnog formata");
+            }
+            Tablica tablica = Tablica.Instanca;
+            tablica.UrediIspisPodataka(argumenti);
         }
     }
 }

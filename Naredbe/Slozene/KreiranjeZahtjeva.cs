@@ -28,7 +28,7 @@ namespace msakac_zadaca_1.Naredbe.Slozene
                 throw new Exception($"Brod sa ID-om {brod} ne postoji u listi brodova!");
             }
 
-            if(brod.aktivniKanal == null)
+            if (brod.aktivniKanal == null)
             {
                 throw new Exception($"Brod sa ID-om {brod.Id} nije spojen na neki kanal!");
             }
@@ -38,9 +38,14 @@ namespace msakac_zadaca_1.Naredbe.Slozene
             //provjera da li je brod vec rezerviran u tom periodu
             Rezervacija? rp = listaSvihRezervacijaUPeriodu.Find(r => r.IdBrod == brod.Id
             && Pomagala.PostojiVremenskoPreklapanja(r.DatumVrijemeOd, r.DatumVrijemeDo, DatumVrijemeOd, DatumVrijemeDo));
+            string poruka = "";
             if (rp != null)
             {
-                throw new Exception($"Brod sa ID-om {brod.Id} već ima vez u rezervaciji ({rp.IdVez}) od {rp.DatumVrijemeOd} do {rp.DatumVrijemeDo} ");
+                poruka = $"Brod sa ID-om {brod.Id} već ima vez u rezervaciji ({rp.IdVez}) od {rp.DatumVrijemeOd} do {rp.DatumVrijemeDo}";
+                IspisPoruke.Greska(poruka);
+                brod.aktivniKanal.PosaljiPorukuBrodovima(poruka, brod);
+                brodskaLuka.listaStavkiDnevnika.Add(new StavkaDnevnika(brod, false, DatumVrijemeOd, poruka));
+                return;
             }
             //Dohvati sve vezove koji odgovaraju brodu i terminima
             List<Vez> listaMogucihVezova = Pomagala.PronadiMoguceVezove(brod, DatumVrijemeOd, DatumVrijemeDo);
@@ -48,11 +53,19 @@ namespace msakac_zadaca_1.Naredbe.Slozene
             Vez? najboljiVez = Pomagala.PronadiOptimalanVez(listaMogucihVezova, brod);
             if (najboljiVez == null)
             {
-                throw new Exception($"Trenutno nema slobodnih vezova za brod sa ID-om {brod.Id} u terminu od {DatumVrijemeOd} do {DatumVrijemeDo}");
+                poruka = $"Trenutno nema slobodnih vezova za brod sa ID-om {brod.Id} u terminu od {DatumVrijemeOd} do {DatumVrijemeDo}";
+                IspisPoruke.Greska(poruka);
+                brod.aktivniKanal.PosaljiPorukuBrodovima(poruka, brod);
+                brodskaLuka.listaStavkiDnevnika.Add(new StavkaDnevnika(brod, false, DatumVrijemeOd, poruka));
+                return;
             }
             Rezervacija rezervacija = new Rezervacija(najboljiVez.Id, brod.Id, DatumVrijemeOd, DatumVrijemeDo);
             brodskaLuka.listaRezervacija.Add(rezervacija);
-            IspisPoruke.Uspjeh($"Zahtjev za privez | Brod {brod.Id} koji nema rezervirani vez trazi privez na optimalan vez {najboljiVez.Id} od {DatumVrijemeOd} do {DatumVrijemeDo} ");
+            poruka = $"Zahtjev za privez | Brod {brod.Id} koji nema rezervirani vez trazi privez na optimalan vez {najboljiVez.Id} od {DatumVrijemeOd} do {DatumVrijemeDo}";
+            IspisPoruke.Uspjeh(poruka);
+            brod.aktivniKanal.PosaljiPorukuBrodovima(poruka, brod);
+            brodskaLuka.listaStavkiDnevnika.Add(new StavkaDnevnika(brod, true, DatumVrijemeOd, poruka));
+
         }
     }
 }
