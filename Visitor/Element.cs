@@ -1,6 +1,6 @@
-using msakac_zadaca_1.Modeli;
+using msakac_zadaca_2.Modeli;
 
-namespace msakac_zadaca_1.Visitor
+namespace msakac_zadaca_2.Visitor
 {
     public abstract class Element
     {

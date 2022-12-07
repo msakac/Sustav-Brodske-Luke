@@ -1,7 +1,7 @@
-﻿using msakac_zadaca_1.Aplikacija;
-using msakac_zadaca_1.Modeli;
+﻿using msakac_zadaca_2.Aplikacija;
+using msakac_zadaca_2.Modeli;
 
-namespace msakac_zadaca_1.CsvCitac
+namespace msakac_zadaca_2.CsvCitac
 {
     public class BrodoviCsvCitac : AbstractCsvCitac
     {

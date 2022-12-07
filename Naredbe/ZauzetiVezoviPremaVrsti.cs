@@ -1,8 +1,8 @@
-using msakac_zadaca_1.Visitor;
-using msakac_zadaca_1.Modeli;
-using msakac_zadaca_1.Aplikacija;
+using msakac_zadaca_2.Visitor;
+using msakac_zadaca_2.Modeli;
+using msakac_zadaca_2.Aplikacija;
 
-namespace msakac_zadaca_1.Naredbe
+namespace msakac_zadaca_2.Naredbe
 {
     public class ZauzetiVezoviPremaVrsti : AbstractNaredba
     {
@@ -19,10 +19,15 @@ namespace msakac_zadaca_1.Naredbe
             {
                 rezervacije.DodajRezervaciju(r);
             }
+            List<Vez> putnicki = rezervacije.Prihvati(new PutnickiVisitor(datumVrijemeProvjere));
+            List<Vez> poslovni = rezervacije.Prihvati(new PoslovniVisitor(datumVrijemeProvjere));
+            List<Vez> ostali = rezervacije.Prihvati(new OstaliVisitor(datumVrijemeProvjere));
+            IspisiTablicu(putnicki, "putnickih", datumVrijemeProvjere);
+            IspisiTablicu(poslovni, "poslovnih", datumVrijemeProvjere);
+            IspisiTablicu(ostali, "ostalih", datumVrijemeProvjere);
 
-            IspisiTablicu(rezervacije.Prihvati(new PutnickiVisitor(datumVrijemeProvjere)), "putnickih", datumVrijemeProvjere);
-            IspisiTablicu(rezervacije.Prihvati(new PoslovniVisitor(datumVrijemeProvjere)), "poslovnih", datumVrijemeProvjere);
-            IspisiTablicu(rezervacije.Prihvati(new OstaliVisitor(datumVrijemeProvjere)), "ostalih", datumVrijemeProvjere);
+            int ukupno = putnicki.Count + poslovni.Count + ostali.Count;
+            IspisPoruke.Uspjeh($"Ukupno zauzetih vezova u {datumVrijemeProvjere} je {ukupno}");
         }
 
         private void IspisiTablicu(List<Vez> lista, string vrstaVeza, DateTime vrijeme)

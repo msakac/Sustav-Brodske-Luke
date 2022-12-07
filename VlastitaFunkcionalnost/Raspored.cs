@@ -1,6 +1,6 @@
-using msakac_zadaca_1.Aplikacija;
+using msakac_zadaca_2.Aplikacija;
 
-namespace msakac_zadaca_1.VlastitaFunkcionalnost
+namespace msakac_zadaca_2.VlastitaFunkcionalnost
 {
     public class Raspored : Ispis
     {

@@ -1,5 +1,5 @@
-﻿using msakac_zadaca_1.Aplikacija;
-namespace msakac_zadaca_1.Naredbe
+﻿using msakac_zadaca_2.Aplikacija;
+namespace msakac_zadaca_2.Naredbe
 {
     public class VirtualnoVrijeme : AbstractNaredba
     {

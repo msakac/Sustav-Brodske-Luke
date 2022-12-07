@@ -1,4 +1,4 @@
-namespace msakac_zadaca_1.Modeli
+namespace msakac_zadaca_2.Modeli
 {
     public class StavkaDnevnika
     {

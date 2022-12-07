@@ -1,8 +1,8 @@
-﻿using msakac_zadaca_1.Modeli;
-using msakac_zadaca_1.CsvCitac;
-using msakac_zadaca_1.Naredbe;
+﻿using msakac_zadaca_2.Modeli;
+using msakac_zadaca_2.CsvCitac;
+using msakac_zadaca_2.Naredbe;
 
-namespace msakac_zadaca_1.Aplikacija
+namespace msakac_zadaca_2.Aplikacija
 {
     public enum NaziviGrupa
     {

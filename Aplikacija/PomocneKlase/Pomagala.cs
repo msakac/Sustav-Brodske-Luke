@@ -1,6 +1,6 @@
-using msakac_zadaca_1.Modeli;
+using msakac_zadaca_2.Modeli;
 
-namespace msakac_zadaca_1.Aplikacija
+namespace msakac_zadaca_2.Aplikacija
 {
     static class Pomagala
     {

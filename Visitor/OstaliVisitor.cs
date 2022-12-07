@@ -1,7 +1,7 @@
-using msakac_zadaca_1.Modeli;
-using msakac_zadaca_1.Aplikacija;
+using msakac_zadaca_2.Modeli;
+using msakac_zadaca_2.Aplikacija;
 
-namespace msakac_zadaca_1.Visitor
+namespace msakac_zadaca_2.Visitor
 {
     public class OstaliVisitor : IVisitor
     {

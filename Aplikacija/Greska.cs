@@ -1,4 +1,4 @@
-﻿namespace msakac_zadaca_1.Aplikacija
+﻿namespace msakac_zadaca_2.Aplikacija
 {
     class Greska
     {

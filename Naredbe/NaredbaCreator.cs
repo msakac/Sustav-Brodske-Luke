@@ -1,4 +1,4 @@
-namespace msakac_zadaca_1.Naredbe
+namespace msakac_zadaca_2.Naredbe
 {
     public abstract class NaredbaCreator
     {

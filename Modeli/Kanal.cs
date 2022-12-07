@@ -1,6 +1,6 @@
-using msakac_zadaca_1.Aplikacija;
+using msakac_zadaca_2.Aplikacija;
 
-namespace msakac_zadaca_1.Modeli
+namespace msakac_zadaca_2.Modeli
 {
     public class Kanal
     {

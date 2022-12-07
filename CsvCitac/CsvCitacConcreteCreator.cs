@@ -1,4 +1,4 @@
-﻿namespace msakac_zadaca_1.CsvCitac
+﻿namespace msakac_zadaca_2.CsvCitac
 {
     public class CsvCitacConcreteCreator : CsvCitacCreator
     {

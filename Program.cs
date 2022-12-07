@@ -1,4 +1,4 @@
-﻿using msakac_zadaca_1.Aplikacija;
+﻿using msakac_zadaca_2.Aplikacija;
 using System.Text.RegularExpressions;
 
 class Zadaca1

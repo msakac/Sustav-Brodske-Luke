@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\msaka\\source\\repos\\msakac_zadaca_1\\msakac_zadaca_1\\msakac_zadaca_1.csproj",
-      "projectName": "msakac_zadaca_1",
-      "projectPath": "C:\\Users\\msaka\\source\\repos\\msakac_zadaca_1\\msakac_zadaca_1\\msakac_zadaca_1.csproj",
+      "projectUniqueName": "C:\\Users\\msaka\\source\\repos\\msakac_zadaca_2\\msakac_zadaca_2\\msakac_zadaca_2.csproj",
+      "projectName": "msakac_zadaca_2",
+      "projectPath": "C:\\Users\\msaka\\source\\repos\\msakac_zadaca_2\\msakac_zadaca_2\\msakac_zadaca_2.csproj",
       "packagesPath": "C:\\Users\\msaka\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\msaka\\source\\repos\\msakac_zadaca_1\\msakac_zadaca_1\\obj\\",
+      "outputPath": "C:\\Users\\msaka\\source\\repos\\msakac_zadaca_2\\msakac_zadaca_2\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\msaka\\AppData\\Roaming\\NuGet\\NuGet.Config",
