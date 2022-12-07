@@ -19,7 +19,6 @@ namespace msakac_zadaca_1.Visitor
 
         public List<Vez> Prihvati(IVisitor visitor)
         {
-            //mora mi na kraju vracati listu vezova
             List<Vez> zauzetiVezovi = new List<Vez>();
             foreach (Rezervacija rezervacija in _rezervacije)
             {

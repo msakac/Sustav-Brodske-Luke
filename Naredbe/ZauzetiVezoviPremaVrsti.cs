@@ -40,7 +40,7 @@ namespace msakac_zadaca_1.Naredbe
             }
             string nazivIspisa = $"Lista zauzetih {vrstaVeza} vezova u {vrijeme}";
             string[] naziviStupaca = { "Vez ID", "Oznaka", "Vrsta", "Mol" };
-            Tablica.Instanca.IspisiTablicu(nazivIspisa, naziviStupaca, listaPodatakaZaIspis, 11);
+            Tablica.Instanca.IspisiTablicu(nazivIspisa, naziviStupaca, listaPodatakaZaIspis, 14);
             Console.WriteLine("\n");
         }
     }
