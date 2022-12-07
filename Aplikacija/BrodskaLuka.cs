@@ -1,7 +1,5 @@
 ﻿using msakac_zadaca_1.Modeli;
 using msakac_zadaca_1.CsvCitac;
-using msakac_zadaca_1.Naredbe.Jednostavne;
-using msakac_zadaca_1.Naredbe.Slozene;
 using msakac_zadaca_1.Naredbe;
 
 namespace msakac_zadaca_1.Aplikacija
@@ -76,47 +74,31 @@ namespace msakac_zadaca_1.Aplikacija
 
         public void ObradiNaredbe(List<KeyValuePair<string, string>> listaRegexGrupaIVrijednosti)
         {
-            NaredbaFactory? factory = null;
             bool prekiniRad = false;
+            NaredbaCreator objekt = new NaredbeConcreteCreator();
             foreach (KeyValuePair<string, string> group in listaRegexGrupaIVrijednosti)
             {
-                // Ako je neka naredba prazna, preskoci
-                if (group.Value == "") continue;
 
-                // Ako je naredba za prekid rada, postavi prekiniRad na true
-                if (group.Key == "prekid_rada" && group.Value != "")
+                if (group.Value != "")
                 {
-                    prekiniRad = true;
-                    continue;
-                }
-
-                proxy.IspisiVirtualnoVrijeme();
-
-                // Ako je jednostavna naredba, stvori jednostavnu naredbu
-                if (group.Key == "status_vezova")
-                {
-                    factory = new JednostavnaNaredbaFactory();
-                    AbstractJednostavnaNaredba naredba = factory.KreirajJednostavnuNaredbu(group.Key);
-                    naredba.IzvrsiNaredbu();
-
-                }
-                
-                // Ako je slozena naredba, stvori slozenu naredbu
-                else
-                {
-                    
-                    factory = new SlozenaNaredbaFactory();
-                    AbstractSlozenaNaredba naredba = factory.KreirajSlozenuNaredbu(group.Key);
+                    //Ispisi virtualno vrijeme prije izvrsavanja naredbe
+                    proxy.IspisiVirtualnoVrijeme();
+                    // Ako je naredba za prekid rada, postavi prekiniRad na true
+                    if (group.Key == "prekid_rada" && group.Value != "")
+                    {
+                        prekiniRad = true;
+                        continue;
+                    }
+                    //Obrada naredbe
+                    AbstractNaredba naredba = objekt.KreirajNaredbu(group.Key);
                     naredba.IzvrsiNaredbu(group.Value);
                 }
-
             }
-
+            //ako je u naredbama bila naredba za prekid rada, prekini rad programa na kraju obrade naredbi
             if (prekiniRad)
             {
-                factory = new JednostavnaNaredbaFactory();
-                AbstractJednostavnaNaredba naredba = factory.KreirajJednostavnuNaredbu("prekid_rada");
-                naredba.IzvrsiNaredbu();
+                AbstractNaredba naredba = objekt.KreirajNaredbu("prekid_rada");
+                naredba.IzvrsiNaredbu("");
             }
         }
         private void kreirajVrsteVezova()

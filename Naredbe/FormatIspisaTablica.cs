@@ -1,8 +1,8 @@
 using msakac_zadaca_1.Aplikacija;
 
-namespace msakac_zadaca_1.Naredbe.Slozene
+namespace msakac_zadaca_1.Naredbe
 {
-    public class FormatIspisaTablica : AbstractSlozenaNaredba
+    public class FormatIspisaTablica : AbstractNaredba
     {
         public override void IzvrsiNaredbu(string naredba)
         {

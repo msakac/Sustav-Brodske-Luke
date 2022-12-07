@@ -1,11 +1,11 @@
 ﻿using msakac_zadaca_1.Aplikacija;
 using msakac_zadaca_1.Modeli;
 
-namespace msakac_zadaca_1.Naredbe.Jednostavne
+namespace msakac_zadaca_1.Naredbe
 {
-    public class StatusVezova : AbstractJednostavnaNaredba
+    public class StatusVezova : AbstractNaredba
     {
-        public override void IzvrsiNaredbu()
+        public override void IzvrsiNaredbu(string naredba)
         {
             BrodskaLuka brodskaLuka = BrodskaLuka.Instanca();
             VirtualniSatProxy proxy = new VirtualniSatProxy();

@@ -1,9 +1,9 @@
 using msakac_zadaca_1.Aplikacija;
 using msakac_zadaca_1.Modeli;
 
-namespace msakac_zadaca_1.Naredbe.Slozene
+namespace msakac_zadaca_1.Naredbe
 {
-    public class KomunikacijaBrodKanal : AbstractSlozenaNaredba
+    public class KomunikacijaBrodKanal : AbstractNaredba
     {
         public override void IzvrsiNaredbu(string naredba)
         {

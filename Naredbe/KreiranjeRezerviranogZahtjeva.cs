@@ -2,9 +2,9 @@
 using msakac_zadaca_1.Modeli;
 
 
-namespace msakac_zadaca_1.Naredbe.Slozene
+namespace msakac_zadaca_1.Naredbe
 {
-    public class KreiranjeRezerviranogZahtjeva : AbstractSlozenaNaredba
+    public class KreiranjeRezerviranogZahtjeva : AbstractNaredba
     {
         public override void IzvrsiNaredbu(string naredba)
         {
@@ -37,11 +37,11 @@ namespace msakac_zadaca_1.Naredbe.Slozene
                 poruka = $"Brod sa ID-om {brod.Id} koji trazi dozvolu za privez nema rezerviran vez u virtualnom vremenu {DatumVrijemeOd}";
                 IspisPoruke.Greska(poruka);
                 brod.aktivniKanal.PosaljiPorukuBrodovima(poruka, brod);
-                brodskaLuka.listaStavkiDnevnika.Add(new StavkaDnevnika(brod, true, DatumVrijemeOd, poruka));
+                brodskaLuka.listaStavkiDnevnika.Add(new StavkaDnevnika(brod, false, DatumVrijemeOd, poruka));
 
                 return;
             }
-            poruka = $"Brod sa ID-om {brod.Id} trazi dozvolu za privez broda na rezervirani vez {rp!.IdVez} ({rp.DatumVrijemeOd}-{rp.DatumVrijemeDo}) u virtualnom vremenu {DatumVrijemeOd}";
+            poruka = $"Brod sa ID-om {brod.Id} trazi dozvolu za privez broda na rezervirani vez {rp!.IdVez} ({rp.DatumVrijemeOd} - {rp.DatumVrijemeDo}) u virtualnom vremenu {DatumVrijemeOd}";
             IspisPoruke.Uspjeh(poruka);
             brod.aktivniKanal.PosaljiPorukuBrodovima(poruka, brod);
             brodskaLuka.listaStavkiDnevnika.Add(new StavkaDnevnika(brod, true, DatumVrijemeOd, poruka));

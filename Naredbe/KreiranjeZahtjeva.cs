@@ -2,9 +2,9 @@
 using msakac_zadaca_1.Modeli;
 
 
-namespace msakac_zadaca_1.Naredbe.Slozene
+namespace msakac_zadaca_1.Naredbe
 {
-    public class KreiranjeZahtjeva : AbstractSlozenaNaredba
+    public class KreiranjeZahtjeva : AbstractNaredba
     {
         public override void IzvrsiNaredbu(string naredba)
         {

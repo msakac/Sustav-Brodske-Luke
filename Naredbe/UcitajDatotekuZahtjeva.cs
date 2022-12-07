@@ -1,9 +1,9 @@
 ﻿using msakac_zadaca_1.Aplikacija;
 using msakac_zadaca_1.CsvCitac;
 
-namespace msakac_zadaca_1.Naredbe.Slozene
+namespace msakac_zadaca_1.Naredbe
 {
-    public class UcitajDatotekuZahtjeva : AbstractSlozenaNaredba
+    public class UcitajDatotekuZahtjeva : AbstractNaredba
     {
         public override void IzvrsiNaredbu(string naredba)
         {

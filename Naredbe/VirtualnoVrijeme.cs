@@ -1,7 +1,7 @@
 ﻿using msakac_zadaca_1.Aplikacija;
-namespace msakac_zadaca_1.Naredbe.Slozene
+namespace msakac_zadaca_1.Naredbe
 {
-    public class VirtualnoVrijeme : AbstractSlozenaNaredba
+    public class VirtualnoVrijeme : AbstractNaredba
     {
         public override void IzvrsiNaredbu(string naredba)
         {

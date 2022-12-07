@@ -1,11 +1,9 @@
-﻿using msakac_zadaca_1.Naredbe.Jednostavne;
-namespace msakac_zadaca_1.Naredbe.Slozene
+namespace msakac_zadaca_1.Naredbe
 {
-    public class SlozenaNaredbaFactory : NaredbaFactory
+    public class NaredbeConcreteCreator : NaredbaCreator
     {
-        public override AbstractSlozenaNaredba KreirajSlozenuNaredbu(string tip)
+        public override AbstractNaredba KreirajNaredbu(string tip)
         {
-
             switch (tip)
             {
                 case "kreiranje_rezerviranog_zahtjev":
@@ -26,14 +24,13 @@ namespace msakac_zadaca_1.Naredbe.Slozene
                     return new ZauzetiVezoviPremaVrsti();
                 case "ispis_podataka":
                     return new IspisPodataka();
+                case "status_vezova":
+                    return new StatusVezova();
+                case "prekid_rada":
+                    return new PrekidRada();
                 default:
-                    throw new Exception($"Slozena naredba {tip} nije moguca!");
+                    throw new Exception($"Naredba {tip} nije moguca!");
             }
-        }
-        public override AbstractJednostavnaNaredba KreirajJednostavnuNaredbu(string tip)
-        {
-            throw new NotImplementedException();
         }
     }
 }
-

@@ -1,9 +1,9 @@
 ﻿using msakac_zadaca_1.Aplikacija;
 using msakac_zadaca_1.Modeli;
 
-namespace msakac_zadaca_1.Naredbe.Slozene
+namespace msakac_zadaca_1.Naredbe
 {
-    public class StatusVezovaPoVrsti : AbstractSlozenaNaredba
+    public class StatusVezovaPoVrsti : AbstractNaredba
     {
         private string formatIspisa = "{0,-4}|{1,-3}|{2,-8}|{3,-5}|{4,-21}|{5,-21}|";
         public override void IzvrsiNaredbu(string naredba)

@@ -1,9 +1,9 @@
 using msakac_zadaca_1.Aplikacija;
 using msakac_zadaca_1.VlastitaFunkcionalnost;
 
-namespace msakac_zadaca_1.Naredbe.Slozene
+namespace msakac_zadaca_1.Naredbe
 {
-    public class IspisPodataka : AbstractSlozenaNaredba
+    public class IspisPodataka : AbstractNaredba
     {
         public override void IzvrsiNaredbu(string naredba)
         {

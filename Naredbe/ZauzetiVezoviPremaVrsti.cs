@@ -2,9 +2,9 @@ using msakac_zadaca_1.Visitor;
 using msakac_zadaca_1.Modeli;
 using msakac_zadaca_1.Aplikacija;
 
-namespace msakac_zadaca_1.Naredbe.Slozene
+namespace msakac_zadaca_1.Naredbe
 {
-    public class ZauzetiVezoviPremaVrsti : AbstractSlozenaNaredba
+    public class ZauzetiVezoviPremaVrsti : AbstractNaredba
     {
         public override void IzvrsiNaredbu(string naredba)
         {
@@ -28,6 +28,11 @@ namespace msakac_zadaca_1.Naredbe.Slozene
         private void IspisiTablicu(List<Vez> lista, string vrstaVeza, DateTime vrijeme)
         {
             List<string[]> listaPodatakaZaIspis = new List<string[]>();
+            if(lista.Count == 0)
+            {
+                IspisPoruke.Greska($"Nema zauzetih {vrstaVeza} vezova u {vrijeme}");
+                return;
+            }
             foreach (Vez v in lista)
             {
                 string[] podaciIspisa = { v.Id.ToString(), v.OznakaVeza!, v.Vrsta.nazivVeza!, v.Mol!.Naziv };
