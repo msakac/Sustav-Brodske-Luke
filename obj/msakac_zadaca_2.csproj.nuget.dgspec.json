@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\msaka\\source\\repos\\msakac_zadaca_2\\msakac_zadaca_2\\msakac_zadaca_2.csproj": {}
+    "C:\\Users\\msaka\\source\\repos\\msakac_zadaca_3\\msakac_zadaca_3\\msakac_zadaca_3.csproj": {}
   },
   "projects": {
-    "C:\\Users\\msaka\\source\\repos\\msakac_zadaca_2\\msakac_zadaca_2\\msakac_zadaca_2.csproj": {
+    "C:\\Users\\msaka\\source\\repos\\msakac_zadaca_3\\msakac_zadaca_3\\msakac_zadaca_3.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\msaka\\source\\repos\\msakac_zadaca_2\\msakac_zadaca_2\\msakac_zadaca_2.csproj",
-        "projectName": "msakac_zadaca_2",
-        "projectPath": "C:\\Users\\msaka\\source\\repos\\msakac_zadaca_2\\msakac_zadaca_2\\msakac_zadaca_2.csproj",
+        "projectUniqueName": "C:\\Users\\msaka\\source\\repos\\msakac_zadaca_3\\msakac_zadaca_3\\msakac_zadaca_3.csproj",
+        "projectName": "msakac_zadaca_3",
+        "projectPath": "C:\\Users\\msaka\\source\\repos\\msakac_zadaca_3\\msakac_zadaca_3\\msakac_zadaca_3.csproj",
         "packagesPath": "C:\\Users\\msaka\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\msaka\\source\\repos\\msakac_zadaca_2\\msakac_zadaca_2\\obj\\",
+        "outputPath": "C:\\Users\\msaka\\source\\repos\\msakac_zadaca_3\\msakac_zadaca_3\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\msaka\\AppData\\Roaming\\NuGet\\NuGet.Config",

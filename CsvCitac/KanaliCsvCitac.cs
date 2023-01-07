@@ -1,7 +1,7 @@
-using msakac_zadaca_2.Aplikacija;
-using msakac_zadaca_2.Modeli;
+using msakac_zadaca_3.Aplikacija;
+using msakac_zadaca_3.Modeli;
 
-namespace msakac_zadaca_2.CsvCitac
+namespace msakac_zadaca_3.CsvCitac
 {
     public class KanaliCsvCitac : AbstractCsvCitac
     {

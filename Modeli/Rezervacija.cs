@@ -1,6 +1,6 @@
-using msakac_zadaca_2.Visitor;
+using msakac_zadaca_3.Visitor;
 
-namespace msakac_zadaca_2.Modeli
+namespace msakac_zadaca_3.Modeli
 {
     public class Rezervacija : Element
     {

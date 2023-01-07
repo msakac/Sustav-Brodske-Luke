@@ -1,7 +1,7 @@
-using msakac_zadaca_2.Aplikacija;
-using msakac_zadaca_2.VlastitaFunkcionalnost;
+using msakac_zadaca_3.Aplikacija;
+using msakac_zadaca_3.VlastitaFunkcionalnost;
 
-namespace msakac_zadaca_2.Naredbe
+namespace msakac_zadaca_3.Naredbe
 {
     public class IspisPodataka : AbstractNaredba
     {

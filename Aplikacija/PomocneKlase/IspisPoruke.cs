@@ -1,4 +1,4 @@
-﻿namespace msakac_zadaca_2.Aplikacija
+﻿namespace msakac_zadaca_3.Aplikacija
 {
     static class IspisPoruke
     {

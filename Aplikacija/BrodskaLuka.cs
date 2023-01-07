@@ -1,8 +1,8 @@
-﻿using msakac_zadaca_2.Modeli;
-using msakac_zadaca_2.CsvCitac;
-using msakac_zadaca_2.Naredbe;
+﻿using msakac_zadaca_3.Modeli;
+using msakac_zadaca_3.CsvCitac;
+using msakac_zadaca_3.Naredbe;
 
-namespace msakac_zadaca_2.Aplikacija
+namespace msakac_zadaca_3.Aplikacija
 {
     public enum NaziviGrupa
     {
@@ -72,27 +72,23 @@ namespace msakac_zadaca_2.Aplikacija
             Console.WriteLine("ERROR: Podaci su vec ucitani");
         }
 
-        public void ObradiNaredbe(List<KeyValuePair<string, string>> listaRegexGrupaIVrijednosti)
+        public void ObradiNaredbe(List<(string grupa, string komanda, int index)> listaRegexGrupaIVrijednosti)
         {
             bool prekiniRad = false;
             NaredbaCreator objekt = new NaredbeConcreteCreator();
-            foreach (KeyValuePair<string, string> group in listaRegexGrupaIVrijednosti)
+            foreach ((string grupa, string komanda, int index) in listaRegexGrupaIVrijednosti)
             {
-
-                if (group.Value != "")
+                //Ispisi virtualno vrijeme prije izvrsavanja naredbe
+                proxy.IspisiVirtualnoVrijeme();
+                // Ako je naredba za prekid rada, postavi prekiniRad na true
+                if (grupa == "prekid_rada" && komanda != "")
                 {
-                    //Ispisi virtualno vrijeme prije izvrsavanja naredbe
-                    proxy.IspisiVirtualnoVrijeme();
-                    // Ako je naredba za prekid rada, postavi prekiniRad na true
-                    if (group.Key == "prekid_rada" && group.Value != "")
-                    {
-                        prekiniRad = true;
-                        continue;
-                    }
-                    //Obrada naredbe
-                    AbstractNaredba naredba = objekt.KreirajNaredbu(group.Key);
-                    naredba.IzvrsiNaredbu(group.Value);
+                    prekiniRad = true;
+                    continue;
                 }
+                //Obrada naredbe
+                AbstractNaredba naredba = objekt.KreirajNaredbu(grupa);
+                naredba.IzvrsiNaredbu(komanda);
             }
             //ako je u naredbama bila naredba za prekid rada, prekini rad programa na kraju obrade naredbi
             if (prekiniRad)

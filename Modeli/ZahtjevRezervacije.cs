@@ -1,6 +1,6 @@
-using msakac_zadaca_2.Aplikacija;
+using msakac_zadaca_3.Aplikacija;
 
-namespace msakac_zadaca_2.Modeli
+namespace msakac_zadaca_3.Modeli
 {
     public class ZahtjevRezervacije
     {

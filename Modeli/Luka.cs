@@ -1,4 +1,4 @@
-namespace msakac_zadaca_2.Modeli
+namespace msakac_zadaca_3.Modeli
 {
     public class Luka
     {

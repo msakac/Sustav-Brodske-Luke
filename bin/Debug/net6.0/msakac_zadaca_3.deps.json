@@ -6,15 +6,15 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v6.0": {
-      "msakac_zadaca_2/1.0.0": {
+      "msakac_zadaca_3/1.0.0": {
         "runtime": {
-          "msakac_zadaca_2.dll": {}
+          "msakac_zadaca_3.dll": {}
         }
       }
     }
   },
   "libraries": {
-    "msakac_zadaca_2/1.0.0": {
+    "msakac_zadaca_3/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

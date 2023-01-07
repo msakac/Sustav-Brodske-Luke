@@ -1,6 +1,6 @@
-using msakac_zadaca_2.Aplikacija;
+using msakac_zadaca_3.Aplikacija;
 
-namespace msakac_zadaca_2.VlastitaFunkcionalnost
+namespace msakac_zadaca_3.VlastitaFunkcionalnost
 {
     public abstract class Ispis
     {

@@ -1,7 +1,7 @@
-﻿using msakac_zadaca_2.Aplikacija;
-using msakac_zadaca_2.CsvCitac;
+﻿using msakac_zadaca_3.Aplikacija;
+using msakac_zadaca_3.CsvCitac;
 
-namespace msakac_zadaca_2.Naredbe
+namespace msakac_zadaca_3.Naredbe
 {
     public class UcitajDatotekuZahtjeva : AbstractNaredba
     {

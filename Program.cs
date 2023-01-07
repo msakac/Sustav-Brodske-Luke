@@ -1,4 +1,4 @@
-﻿using msakac_zadaca_2.Aplikacija;
+﻿using msakac_zadaca_3.Aplikacija;
 using System.Text.RegularExpressions;
 
 class Zadaca1
@@ -35,13 +35,12 @@ class Zadaca1
                 naredba = Console.ReadLine();
                 regex = new Regex(_regexNaredba);
                 match = regex.Match(naredba!);
-                if (!regex.IsMatch(naredba!))
+                if (!match.Success)
                 {
                     throw new Exception($"Naredba '{naredba}' nije ispravnog formata");
                 }
-                listaRegexGrupaIVrijednosti.Clear();
-                listaRegexGrupaIVrijednosti = DohvatiRegexGrupuIVrijednost(regex, match);
-                brodskaLuka.ObradiNaredbe(listaRegexGrupaIVrijednosti);
+                List<(string grupa, string komanda, int index)> list = DohvatiISortirajNaredbe(regex, match);
+                brodskaLuka.ObradiNaredbe(list);
             }
             catch (Exception e)
             {
@@ -68,6 +67,32 @@ class Zadaca1
             if (nazivGrupe.Length > 2)
                 listaNazivaGrupaIDatoteka.Add(new KeyValuePair<string, string>(nazivGrupe, grupe[nazivGrupe].Value));
         }
+
+
+        Console.WriteLine();
+        foreach (KeyValuePair<string, string> par in listaNazivaGrupaIDatoteka)
+        {
+            Console.WriteLine(par.Key + " " + par.Value);
+        }
         return listaNazivaGrupaIDatoteka;
+    }
+
+    private static List<(string grupa, string komanda, int index)> DohvatiISortirajNaredbe(Regex regex, Match match)
+    {
+        List<(string grupa, string komanda, int index)> list = new List<(string grupa, string komanda, int index)>();
+        foreach (Group group in match.Groups)
+        {
+            // that have captures and names which are not numbers
+            if (group.Success && !int.TryParse(group.Name, out int ignore))
+            {
+                // Add all Captures with group name, match value and match index
+                foreach (Capture capture in group.Captures)
+                {
+                    list.Add((group.Name, capture.Value, capture.Index));
+                }
+            }
+        }
+        list = list.OrderBy(l => l.index).ToList();
+        return list;
     }
 }
