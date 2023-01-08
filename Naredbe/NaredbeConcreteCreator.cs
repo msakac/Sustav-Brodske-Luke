@@ -26,6 +26,10 @@ namespace msakac_zadaca_3.Naredbe
                     return new IspisPodataka();
                 case "status_vezova":
                     return new StatusVezova();
+                case "spremanje_stanja":
+                    return new SpremanjePostojecegStanja();
+                case "vracanje_stanja":
+                    return new VracanjeSpremljenogStanja();
                 case "prekid_rada":
                     return new PrekidRada();
                 default:

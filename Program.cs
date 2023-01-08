@@ -10,7 +10,7 @@ class Zadaca1
                 @"|(?<vezovi_po_vrsti>V (?:PU|PO|OS) (:?S|Z) (\d{2}\.\d{2}\.\d{4}\. \d{2}\:\d{2}\:\d{2}) (\d{2}\.\d{2}\.\d{4}\. \d{2}\:\d{2}\:\d{2})\s?)?()|" +
                 @"(?<datoteka_zahtjeva>UR [0-9a-zA-Z_-]{1,}\.csv\s?)?()|(?<kreiranje_rezerviranog_zahtjev>ZD [0-9]{1,}\s?)?()|" +
                 @"(?<kreiranje_zahtjeva>ZP [0-9]{1,} [0-9]{1,}\s?)?()|(?<komunikacija_brod_kanal>F [0-9]{1,} [0-9]{1,}( [Q])?\s?)?()|" +
-                @"(?<format_ispisa_tablica>T(( P)?()|( Z)?()|( RB)?\s?){1,3})?()|(?<zauzeti_vezovi_prema_vrsti>ZA (\d{2}\.\d{2}\.\d{4}\. \d{2}\:\d{2})\s?)?()|(?<ispis_podataka>VF(( R)?()|( B)?()|( M)?()|( K)?()|( D)?\s?){1,8})?)*$)";
+                @"(?<format_ispisa_tablica>T(( P)?()|( Z)?()|( RB)?\s?){1,3})?()|(?<zauzeti_vezovi_prema_vrsti>ZA (\d{2}\.\d{2}\.\d{4}\. \d{2}\:\d{2})\s?)?()|(?<ispis_podataka>VF(( R)?()|( B)?()|( M)?()|( K)?()|( D)?\s?){1,8})?()|(?<spremanje_stanja>SPS ""(.){1,}"")?()|(?<vracanje_stanja>VPS ""(.){1,}"")?)*$)";
     static public void Main(String[] args)
     {
         string? naredba = KreirajNaredbu(args);
