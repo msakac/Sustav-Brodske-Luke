@@ -30,10 +30,9 @@ class Zadaca1
 
         //kreiram view
         Ispis ispis = KreirajIspis(listaKonfiguracijeEmulatora);
-        ispis.TestirajProperties();
-        ispis.DodajGresku("Greska 1");
 
         BrodskaLuka brodskaLuka = BrodskaLuka.Instanca();
+        brodskaLuka.ispis = ispis;
         brodskaLuka.InicijalizirajPodatke(listaRegexGrupaIVrijednosti);
         VirtualniSatProxy proxy = new VirtualniSatProxy();
         Timer t = new Timer(proxy.Tick!, null, 0, 1000);

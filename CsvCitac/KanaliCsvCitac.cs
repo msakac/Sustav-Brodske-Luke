@@ -7,8 +7,8 @@ namespace msakac_zadaca_3.CsvCitac
     {
         public override void citajPodatke(string datoteka)
         {
-            Console.WriteLine($"\nKanali | Učitavam datoteku: {datoteka}...");
             BrodskaLuka brodskaLuka = BrodskaLuka.Instanca();
+            brodskaLuka.ispis!.DodajUpis($"Kanali | Učitavam datoteku: {datoteka}...");
             try
             {
                 using StreamReader citac = new StreamReader(brodskaLuka.trenutniDirektorij + datoteka);
@@ -38,7 +38,7 @@ namespace msakac_zadaca_3.CsvCitac
                         Greska.Instanca.IspisiGresku(e, redak);
                     }
                 }
-                IspisPoruke.Uspjeh($"|===== Učitano {ucitaniPodaci.ToString()} ispravnih redaka iz datoteke {datoteka} ");
+                brodskaLuka.ispis!.DodajUpis($"Kanali | Učitano {ucitaniPodaci.ToString()} ispravnih redaka iz datoteke {datoteka} ");
             }
             catch
             {

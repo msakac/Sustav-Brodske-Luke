@@ -2,6 +2,7 @@
 using msakac_zadaca_3.CsvCitac;
 using msakac_zadaca_3.Naredbe;
 using msakac_zadaca_3.Memento;
+using msakac_zadaca_3.Pogledi;
 
 namespace msakac_zadaca_3.Aplikacija
 {
@@ -16,6 +17,7 @@ namespace msakac_zadaca_3.Aplikacija
         public readonly string trenutniDirektorij = Directory.GetCurrentDirectory() + "\\";
         private bool PodaciInicijalizirani = false;
         public List<Brod> listaBrodova = new List<Brod>();
+        public Ispis? ispis;
         public List<Vez> listaVezova = new List<Vez>();
         public List<VrstaVeza> listaVrsteVezove = new List<VrstaVeza>();
         public List<Mol> listaMolova = new List<Mol>();

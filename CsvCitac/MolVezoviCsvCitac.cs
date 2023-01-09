@@ -7,8 +7,8 @@ namespace msakac_zadaca_3.CsvCitac
     {
         public override void citajPodatke(string datoteka)
         {
-            Console.WriteLine($"\nMol-Vezovi | Učitavam datoteku: {datoteka}...");
             BrodskaLuka brodskaLuka = BrodskaLuka.Instanca();
+            brodskaLuka.ispis!.DodajUpis($"Mol-Vezovi | Učitavam datoteku: {datoteka}...");
             try
             {
                 using StreamReader citac = new StreamReader(brodskaLuka.trenutniDirektorij + datoteka);
@@ -44,8 +44,8 @@ namespace msakac_zadaca_3.CsvCitac
                 }
                 int brojVezova = brodskaLuka.listaVezova.Count();
                 obrisiVezoveBezMola();
-                IspisPoruke.Uspjeh($"|===== Od {brojVezova} vezova, njih {dodanoMolovaVezovima} sada ima mol, a {brojVezova - dodanoMolovaVezovima} je obrisano");
-                IspisPoruke.Uspjeh($"|===== Učitano {ucitaniPodaci.ToString()} ispravnih redaka iz datoteke {datoteka} ");
+                brodskaLuka.ispis!.DodajUpis($"Mol-Vezovi | Od {brojVezova} vezova, njih {dodanoMolovaVezovima} sada ima mol, a {brojVezova - dodanoMolovaVezovima} je obrisano");
+                brodskaLuka.ispis!.DodajUpis($"Mol-Vezovi | Učitano {ucitaniPodaci.ToString()} ispravnih redaka iz datoteke {datoteka} ");
             }
             catch
             {

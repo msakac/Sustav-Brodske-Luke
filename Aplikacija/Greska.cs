@@ -17,6 +17,7 @@
         }
         public void IspisiGresku(Exception e, string? redak)
         {
+            BrodskaLuka brodskaLuka = BrodskaLuka.Instanca();
             string porukaGreske = e.Message;
             brojacGreski++;
             if (e is FormatException)
@@ -29,7 +30,7 @@
                 poruka = $"Greska {brojacGreski}: {porukaGreske} Redak: {redak}";
             }
 
-            IspisPoruke.Greska(poruka);
+            brodskaLuka.ispis!.DodajGresku(poruka);
         }
     }
 }
