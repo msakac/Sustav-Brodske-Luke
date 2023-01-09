@@ -1,6 +1,7 @@
 ﻿using msakac_zadaca_3.Modeli;
 using msakac_zadaca_3.CsvCitac;
 using msakac_zadaca_3.Naredbe;
+using msakac_zadaca_3.Memento;
 
 namespace msakac_zadaca_3.Aplikacija
 {
@@ -22,7 +23,7 @@ namespace msakac_zadaca_3.Aplikacija
         public List<StavkaRasporeda> listaStavkiRasporeda = new List<StavkaRasporeda>();
         public List<Rezervacija> listaRezervacija = new List<Rezervacija>();
         public List<StavkaDnevnika> listaStavkiDnevnika = new List<StavkaDnevnika>();
-        public List<Stanje> listaSpremljenihStanja = new List<Stanje>();
+        public Caretaker caretaker = new Caretaker();
         private VirtualniSatProxy proxy = new VirtualniSatProxy();
 
         private Luka? _luka;

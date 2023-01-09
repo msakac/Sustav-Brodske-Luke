@@ -20,7 +20,7 @@ namespace msakac_zadaca_3.Naredbe
             //provjera da li brod postoji
             if (brod == null)
             {
-                throw new Exception($"Brod sa ID-om {brod} ne postoji u listi brodova!");
+                throw new Exception($"Brod sa ID-om {idBrod} ne postoji u listi brodova!");
             }
 
             if (brod.aktivniKanal == null)

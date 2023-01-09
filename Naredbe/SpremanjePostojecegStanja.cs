@@ -1,5 +1,7 @@
 using msakac_zadaca_3.Aplikacija;
+using msakac_zadaca_3.Memento;
 using msakac_zadaca_3.Modeli;
+
 
 namespace msakac_zadaca_3.Naredbe
 {
@@ -12,15 +14,12 @@ namespace msakac_zadaca_3.Naredbe
             string[]? argumenti = naredba.Split('"');
             string nazivStanja = argumenti[1];
             DateTime trenutnoVrijeme = proxy.Dohvati();
-            //provjerim da li vec postoji spremljeno stanje sa istim nazivom u listi
-            Stanje? spremljenoStanje = brodskaLuka.listaSpremljenihStanja.Find(ss => ss.nazivStanja == nazivStanja);
-            if (spremljenoStanje != null)
-            {
-                throw new Exception($"Stanje sa nazivom {nazivStanja} vec postoji u listi spremljenih stanja");
-            }
-            // ako ne postoji, spremi novo stanje u listu
-            brodskaLuka.listaSpremljenihStanja.Add(new Stanje(nazivStanja, trenutnoVrijeme,brodskaLuka.listaRezervacija));
-            IspisPoruke.Uspjeh($"Spremljeno trenutno stanje svih vezova u trenutku virtualnog vremena nazivom: {nazivStanja}");
+
+            Originator originator = new Originator();
+            Console.WriteLine(brodskaLuka.listaRezervacija.Count);
+            originator.listaRezervacija = new List<Rezervacija>(brodskaLuka.listaRezervacija);
+            originator.virtualnoVrijeme = trenutnoVrijeme;
+            originator.spremiStanje(nazivStanja);
         }
     }
 }
