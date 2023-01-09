@@ -1,11 +1,12 @@
 ﻿using msakac_zadaca_3.Aplikacija;
+using msakac_zadaca_3.Pogledi;
 using System.Text.RegularExpressions;
 
 class Zadaca1
 {
     private static readonly string _regexDatoteka = @"(^(?:(?:(-l (?<luke>[0-9a-zA-Z_-]{3,}\.csv)\s?){1}()|(-m (?<molovi>[0-9a-zA-Z_-]{3,}\.csv)\s?){1}()|" +
         @"(-k (?<kanali>[0-9a-zA-Z_-]{3,}\.csv)\s?){1}()|(-v (?<vezovi>[0-9a-zA-Z_-]{3,}\.csv)\s?){1}()|(-mv (?<molvez>[0-9a-zA-Z_-]{3,}\.csv)\s?){1}()|" +
-        @"(-b (?<brodovi>[0-9a-zA-Z_-]{3,}\.csv)\s?){1}){6}()|(-r (?<raspored>[0-9a-zA-Z_-]{3,}\.csv)\s?){0,1}){1,2}$)";
+        @"(-b (?<brodovi>[0-9a-zA-Z_-]{3,}\.csv)\s?){1}()|(-br (?<broj_redova>2[4-9]|[3-7][0-9]|80)\s?){1}()|(-vt (?<omjer>75:25|50:50|25:75)\s?){1}()|(-pd (?<uloge_ekrana>R:P|P:R)\s?){1}){9}()|(-r (?<raspored>[0-9a-zA-Z_-]{3,}\.csv)\s?){0,1}){1,2}$)";
     private static readonly string _regexNaredba = @"(^((?<status_vezova>I\s?)?()|(?<prekid_rada>Q\s?)?()|(?<vrijeme>VR (\d{2}\.\d{2}\.\d{4}\. \d{2}\:\d{2}\:\d{2})\s?)?()" +
                 @"|(?<vezovi_po_vrsti>V (?:PU|PO|OS) (:?S|Z) (\d{2}\.\d{2}\.\d{4}\. \d{2}\:\d{2}\:\d{2}) (\d{2}\.\d{2}\.\d{4}\. \d{2}\:\d{2}\:\d{2})\s?)?()|" +
                 @"(?<datoteka_zahtjeva>UR [0-9a-zA-Z_-]{1,}\.csv\s?)?()|(?<kreiranje_rezerviranog_zahtjev>ZD [0-9]{1,}\s?)?()|" +
@@ -20,8 +21,18 @@ class Zadaca1
         {
             IspisPoruke.FatalnaGreska("Uneseni argumenti naredbe nisu ispravni");
         }
-
+        //Dohvatim sve vrijednosti iz unesene naredbe
         List<KeyValuePair<string, string>> listaRegexGrupaIVrijednosti = DohvatiRegexGrupuIVrijednost(regex, match);
+        //Dohvatim vrijednosti koje su povezane uz postavke emulatora
+        List<KeyValuePair<string, string>> listaKonfiguracijeEmulatora = DohvatiArgumenteKonfiguracija(listaRegexGrupaIVrijednosti);
+        //Obrisem postavke emulatora iz liste
+        listaRegexGrupaIVrijednosti.RemoveAll(l => l.Key == "broj_redova" || l.Key == "omjer" || l.Key == "uloge_ekrana");
+
+        //kreiram view
+        Ispis ispis = KreirajIspis(listaKonfiguracijeEmulatora);
+        ispis.TestirajProperties();
+        ispis.DodajGresku("Greska 1");
+
         BrodskaLuka brodskaLuka = BrodskaLuka.Instanca();
         brodskaLuka.InicijalizirajPodatke(listaRegexGrupaIVrijednosti);
         VirtualniSatProxy proxy = new VirtualniSatProxy();
@@ -67,14 +78,43 @@ class Zadaca1
             if (nazivGrupe.Length > 2)
                 listaNazivaGrupaIDatoteka.Add(new KeyValuePair<string, string>(nazivGrupe, grupe[nazivGrupe].Value));
         }
-
-
-        Console.WriteLine();
-        foreach (KeyValuePair<string, string> par in listaNazivaGrupaIDatoteka)
-        {
-            Console.WriteLine(par.Key + " " + par.Value);
-        }
         return listaNazivaGrupaIDatoteka;
+    }
+
+    private static List<KeyValuePair<string, string>> DohvatiArgumenteKonfiguracija(List<KeyValuePair<string, string>> listaRegexGrupaIVrijednosti)
+    {
+        List<KeyValuePair<string, string>> listaKonfiguracijeEmulatora = new List<KeyValuePair<string, string>>();
+        foreach (KeyValuePair<string, string> par in listaRegexGrupaIVrijednosti)
+        {
+            if (par.Key == "broj_redova" || par.Key == "omjer" || par.Key == "uloge_ekrana")
+            {
+                listaKonfiguracijeEmulatora.Add(par);
+            }
+        }
+        return listaKonfiguracijeEmulatora;
+    }
+
+    private static Ispis KreirajIspis(List<KeyValuePair<string, string>> listaKonfiguracijeEmulatora)
+    {
+        int brojRedova = 0;
+        string omjer = "", ulogaEkrana = "";
+        foreach (KeyValuePair<string, string> par in listaKonfiguracijeEmulatora)
+        {
+            if (par.Key == "broj_redova")
+            {
+                brojRedova = int.Parse(par.Value);
+            }
+            else if (par.Key == "omjer")
+            {
+                omjer = par.Value;
+            }
+            else if (par.Key == "uloge_ekrana")
+            {
+                ulogaEkrana = par.Value;
+            }
+        }
+        Ispis ispis = new Ispis(brojRedova, omjer, ulogaEkrana);
+        return ispis;
     }
 
     private static List<(string grupa, string komanda, int index)> DohvatiISortirajNaredbe(Regex regex, Match match)

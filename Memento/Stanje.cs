@@ -18,7 +18,6 @@ namespace msakac_zadaca_3.Memento
         }
 
         public List<Rezervacija> dohvatiListuRezervacija(){
-            Console.WriteLine("Stanje dohvati - " + this.listaRezervacija.Count);
             return this.listaRezervacija;
         }
     }
