@@ -75,7 +75,7 @@ namespace msakac_zadaca_3.Aplikacija
             {
                 brodskaLuka.ispis!.DodajUpis(linija);
                 string ispisNaslovaTablice = String.Format("|{0}|", centrirajIspis(nazivTablice, brojZnakovaZaNaslov));
-                IspisPoruke.PorukaKanala(ispisNaslovaTablice);
+                brodskaLuka.ispis!.DodajUpis(ispisNaslovaTablice);
                 brodskaLuka.ispis!.DodajUpis(linija);
                 string ispisNaslovaRedaka = String.Format(formatRedka, naziviStupaca);
                 brodskaLuka.ispis!.DodajUpis(ispisNaslovaRedaka);
@@ -107,7 +107,7 @@ namespace msakac_zadaca_3.Aplikacija
             {
                 brodskaLuka.ispis!.DodajUpis(linija);
                 string IspisPodnozjaTablice = String.Format("|{0}|", centrirajIspis($"Ukupan broj podataka: {brojac}", brojZnakovaZaNaslov));
-                IspisPoruke.PorukaKanala(IspisPodnozjaTablice);
+                brodskaLuka.ispis!.DodajUpis(IspisPodnozjaTablice);
                 brodskaLuka.ispis!.DodajUpis(linija);
             }
         }

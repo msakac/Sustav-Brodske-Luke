@@ -23,6 +23,7 @@ namespace msakac_zadaca_3.Pogledi
             {
                 this.gornjiDioJeRadni = false;
             }
+            Console.Clear();
         }
 
         public void DodajUpis(string poruka)
@@ -50,15 +51,16 @@ namespace msakac_zadaca_3.Pogledi
             }
             VirtualniSatProxy proxy = new VirtualniSatProxy();
             Console.Write(ANSI_ESC + $"{pozicija};0f");
+            Console.Write(ANSI_ESC + "2K");
             proxy.IspisiVirtualnoVrijeme();
             Console.Write(ANSI_ESC + $"{pozicija + 1};0f");
+            Console.Write(ANSI_ESC + "2K");
             Console.Write("=====> Unesi naredbu: ");
         }
         private void AzurirajEkran()
         {
             string linija = string.Concat(Enumerable.Repeat("=", Console.WindowWidth));
-            Thread.Sleep(75);
-            Console.Clear();
+            Thread.Sleep(40);
             IspisiLiniju(0);
             string bojaGornja ="32m"; //zelena
             string bojaDonja = "31m"; //crvena
@@ -104,6 +106,7 @@ namespace msakac_zadaca_3.Pogledi
             {
                 return;
             }
+            Console.Write(ANSI_ESC + "2K");
             Console.Write(ANSI_ESC + boja + ispis + ANSI_ESC + "0m");
         }
         private void IspisiDonjiDio(int i, string boja)
@@ -120,12 +123,12 @@ namespace msakac_zadaca_3.Pogledi
                 {
                     ispis = listaUpisa[listaUpisa.Count - brojLinijaDonjiDio + i - brojLinijaGornjiDio - 1];
                 }
-
             }
             catch
             {
                 return;
             }
+            Console.Write(ANSI_ESC + "2K");
             Console.Write(ANSI_ESC + boja + ispis + ANSI_ESC + "0m");
         }
 
@@ -134,6 +137,7 @@ namespace msakac_zadaca_3.Pogledi
             string linija = string.Concat(Enumerable.Repeat("=", Console.WindowWidth));
             Console.Write(ANSI_ESC + $"{pozicija};0f");
             Console.Write(ANSI_ESC + "33m" + linija + ANSI_ESC + "0m");
+            Console.Write(ANSI_ESC + $"{pozicija+1};0f");
         }
     }
 }
