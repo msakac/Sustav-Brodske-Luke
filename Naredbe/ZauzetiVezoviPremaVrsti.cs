@@ -33,10 +33,11 @@ namespace msakac_zadaca_3.Naredbe
 
         private void IspisiTablicu(List<Vez> lista, string vrstaVeza, DateTime vrijeme)
         {
+            BrodskaLuka brodskaLuka = BrodskaLuka.Instanca();
             List<string[]> listaPodatakaZaIspis = new List<string[]>();
             if (lista.Count == 0)
             {
-                IspisPoruke.Greska($"Nema zauzetih {vrstaVeza} vezova u {vrijeme}");
+                brodskaLuka.ispis!.DodajGresku($"Nema zauzetih {vrstaVeza} vezova u {vrijeme}");
                 return;
             }
             foreach (Vez v in lista)

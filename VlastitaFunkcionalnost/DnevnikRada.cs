@@ -10,11 +10,12 @@ namespace msakac_zadaca_3.VlastitaFunkcionalnost
         {
             if (argument == "D")
             {
+                BrodskaLuka brodskaLuka = BrodskaLuka.Instanca();
                 List<string[]> listaPodatakaZaIspis = new List<string[]>();
                 List<StavkaDnevnika> listaStavkiDnevnika = BrodskaLuka.Instanca().listaStavkiDnevnika;
                 if(listaStavkiDnevnika.Count == 0)
                 {
-                    IspisPoruke.Greska("Dnevnik rada je prazan!");
+                    brodskaLuka.ispis!.DodajGresku("Dnevnik rada je prazan!");
                     return;
                 }
                 foreach (StavkaDnevnika s in listaStavkiDnevnika)

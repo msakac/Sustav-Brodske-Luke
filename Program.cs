@@ -19,7 +19,7 @@ class Zadaca1
         Match match = regex.Match(naredba);
         if (!regex.IsMatch(naredba) || naredba.Length == 0)
         {
-            IspisPoruke.FatalnaGreska("Uneseni argumenti naredbe nisu ispravni");
+            Console.WriteLine("Uneseni argumenti naredbe nisu ispravni");
         }
         //Dohvatim sve vrijednosti iz unesene naredbe
         List<KeyValuePair<string, string>> listaRegexGrupaIVrijednosti = DohvatiRegexGrupuIVrijednost(regex, match);

@@ -17,7 +17,7 @@ namespace msakac_zadaca_3.CsvCitac
                 int brojPropertija = typeof(Brod).GetProperties().Length - 1;
                 if (brojAtributa != brojPropertija)
                 {
-                    IspisPoruke.FatalnaGreska("Broj redaka u datoteci i atributa u klasi su razliciti!");
+                    brodskaLuka.ispis!.DodajGresku("Broj redaka u datoteci i atributa u klasi su razliciti!");
                 }
                 string redak;
                 int ucitaniPodaci = 0;
@@ -52,7 +52,7 @@ namespace msakac_zadaca_3.CsvCitac
             }
             catch
             {
-                IspisPoruke.FatalnaGreska($"Datoteku {datoteka} nije moguće pročitati ili ne postoji u direktoriju!");
+                brodskaLuka.ispis!.DodajGresku($"Datoteku {datoteka} nije moguće pročitati ili ne postoji u direktoriju!");
             }
         }
     }

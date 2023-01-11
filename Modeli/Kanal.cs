@@ -82,7 +82,7 @@ namespace msakac_zadaca_3.Modeli
             {
                 if (b.Id != brod.Id)
                 {
-                    IspisPoruke.PorukaKanala($"Kanal {this.Frekvecija}, Brod {b.Id} prima poruku: {poruka}");
+                    brodskaLuka.ispis!.DodajUpis($"Kanal {this.Frekvecija}, Brod {b.Id} prima poruku: {poruka}");
                 }
             }
         }

@@ -35,7 +35,7 @@ namespace msakac_zadaca_3.Naredbe
             if (rp == null)
             {
                 poruka = $"Brod sa ID-om {brod.Id} koji trazi dozvolu za privez nema rezerviran vez u virtualnom vremenu {DatumVrijemeOd}";
-                IspisPoruke.Greska(poruka);
+                brodskaLuka.ispis!.DodajGresku(poruka);
                 brod.aktivniKanal.PosaljiPorukuBrodovima(poruka, brod);
                 brodskaLuka.listaStavkiDnevnika.Add(new StavkaDnevnika(brod, false, DatumVrijemeOd, poruka));
 
