@@ -1,3 +1,5 @@
+using msakac_zadaca_3.Aplikacija;
+
 namespace msakac_zadaca_3.Pogledi
 {
     public class Ispis
@@ -35,51 +37,107 @@ namespace msakac_zadaca_3.Pogledi
             AzurirajEkran();
         }
 
+        public void PorukaNaredbe()
+        {
+            int pozicija;
+            if (gornjiDioJeRadni)
+            {
+                pozicija = brojLinijaGornjiDio;
+            }
+            else
+            {
+                pozicija = brojLinijaDonjiDio + brojLinijaGornjiDio + 1;
+            }
+            VirtualniSatProxy proxy = new VirtualniSatProxy();
+            Console.Write(ANSI_ESC + $"{pozicija};0f");
+            proxy.IspisiVirtualnoVrijeme();
+            Console.Write(ANSI_ESC + $"{pozicija + 1};0f");
+            Console.Write("=====> Unesi naredbu: ");
+        }
         private void AzurirajEkran()
         {
-            Thread.Sleep(50);
-            Console.Write(ANSI_ESC + "2J");
-            for (int i = 0; i <= brojLinijaGornjiDio; i++)
+            string linija = string.Concat(Enumerable.Repeat("=", Console.WindowWidth));
+            Thread.Sleep(75);
+            Console.Clear();
+            IspisiLiniju(0);
+            string bojaGornja ="32m"; //zelena
+            string bojaDonja = "31m"; //crvena
+            int petljaGornjiDioDo = brojLinijaGornjiDio - 1;
+            if(!gornjiDioJeRadni)
             {
-                Console.Write(ANSI_ESC + $"{i};0f");
-                string ispis = "";
-                try
-                {
-                    ispis = listaUpisa[listaUpisa.Count - brojLinijaGornjiDio + i - 1];
-                }
-                catch
-                {
-                    continue;
-                }
-                Console.Write(ANSI_ESC + "32m" + ispis + ANSI_ESC + "0m");
+                bojaGornja = "31m";
+                bojaDonja = "32m";
+                petljaGornjiDioDo = brojLinijaGornjiDio + 1;
             }
-            for (int i = brojLinijaGornjiDio + 1; i <= brojLinijaGornjiDio + brojLinijaDonjiDio; i++)
+            for (int i = 2; i <= petljaGornjiDioDo; i++)
             {
-                Console.Write(ANSI_ESC + $"{i};0f");
-                string ispis = "";
-                try
-                {
-                    ispis = listaGresaka[listaGresaka.Count - 1 - brojLinijaDonjiDio + i - brojLinijaGornjiDio];
-                }
-                catch
-                {
-                    continue;
-                }
-                Console.Write(ANSI_ESC + "31m" + ispis + ANSI_ESC + "0m");
+                IspisiGornjiDio(i, bojaGornja);
             }
+
+            IspisiLiniju(brojLinijaGornjiDio + 2);
+
+            for (int i = brojLinijaGornjiDio + 3; i <= brojLinijaGornjiDio + 2 + brojLinijaDonjiDio; i++)
+            {
+                IspisiDonjiDio(i, bojaDonja);
+            }
+
+            IspisiLiniju(brojLinijaGornjiDio + brojLinijaDonjiDio + 3);
+        }
+
+        private void IspisiGornjiDio(int i, string boja)
+        {
+            Console.Write(ANSI_ESC + $"{i};0f");
+            string ispis = "";
+            try
+            {
+                if (gornjiDioJeRadni)
+                {
+                    ispis = listaUpisa[listaUpisa.Count - brojLinijaGornjiDio + i];
+                }
+                else
+                {
+                    ispis = listaGresaka[listaGresaka.Count - brojLinijaGornjiDio + i - 2];
+                }
+
+            }
+            catch
+            {
+                return;
+            }
+            Console.Write(ANSI_ESC + boja + ispis + ANSI_ESC + "0m");
+        }
+        private void IspisiDonjiDio(int i, string boja)
+        {
+            Console.Write(ANSI_ESC + $"{i};0f");
+            string ispis = "";
+            try
+            {
+                if (gornjiDioJeRadni)
+                {
+                    ispis = listaGresaka[listaGresaka.Count - brojLinijaDonjiDio + i - brojLinijaGornjiDio - 3];
+                }
+                else
+                {
+                    ispis = listaUpisa[listaUpisa.Count - brojLinijaDonjiDio + i - brojLinijaGornjiDio - 1];
+                }
+
+            }
+            catch
+            {
+                return;
+            }
+            Console.Write(ANSI_ESC + boja + ispis + ANSI_ESC + "0m");
+        }
+
+        private void IspisiLiniju(int pozicija)
+        {
+            string linija = string.Concat(Enumerable.Repeat("=", Console.WindowWidth));
+            Console.Write(ANSI_ESC + $"{pozicija};0f");
+            Console.Write(ANSI_ESC + "33m" + linija + ANSI_ESC + "0m");
         }
     }
 }
 
-//Trebam imati dvije liste stringova, jedna lista je za sve upise i uspjesne ispise i druga lista za sve greske
-//Na ekranu prikazujem onoliko poruka koliko ih stane prema konfiguracijama0
-//Tri argumenta
-//1. -br {x} 24<=x<=80            => ukupni broj linija na ekranu
-//2. -vt {50:50 | 25:75 | 75:25}  => odnos izmedju linija za upise i linija za greske
-//3. -pd {R:P | P:R}              => koji dio ekrana sluzi za upise i koji za greske
 
-//Jedna metoda koja sadrzi listu u koju dodajem upise i uspjesne ispise
-//Druga metoda koja sadrzi listu u koju dodajem greske
-//I zadnja metoda koja jednostavno sluzi za ispis i prikazuje onolko podatki kolko je parametrima odredeno
 
 

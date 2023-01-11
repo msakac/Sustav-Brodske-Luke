@@ -42,7 +42,7 @@ namespace msakac_zadaca_3.Naredbe
                 return;
             }
             poruka = $"Brod sa ID-om {brod.Id} trazi dozvolu za privez broda na rezervirani vez {rp!.IdVez} ({rp.DatumVrijemeOd} - {rp.DatumVrijemeDo}) u virtualnom vremenu {DatumVrijemeOd}";
-            IspisPoruke.Uspjeh(poruka);
+            brodskaLuka.ispis!.DodajUpis(poruka);
             brod.aktivniKanal.PosaljiPorukuBrodovima(poruka, brod);
             brodskaLuka.listaStavkiDnevnika.Add(new StavkaDnevnika(brod, true, DatumVrijemeOd, poruka));
 

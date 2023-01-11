@@ -7,7 +7,8 @@ namespace msakac_zadaca_3.Naredbe
     {
         public override void IzvrsiNaredbu(string naredba)
         {
-            IspisPoruke.Uspjeh("\nPrekidam rad aplikacije!");
+            BrodskaLuka brodskaLuka = BrodskaLuka.Instanca();
+            brodskaLuka.ispis!.DodajUpis("\nPrekidam rad aplikacije!");
             Environment.Exit(0);
         }
     }

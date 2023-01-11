@@ -69,7 +69,7 @@ namespace msakac_zadaca_3.Aplikacija
 
                 }
                 proxy.Postavi(luka!.VirtualnoVrijeme);
-                IspisPoruke.Uspjeh($"\nPodaci inicijalizirani! Virtualni sat postavljen na: {proxy.Dohvati().ToString()}");
+                ispis!.DodajUpis($"Podaci inicijalizirani! Virtualni sat postavljen na: {proxy.Dohvati().ToString()}");
                 PodaciInicijalizirani = true;
                 return;
             }
@@ -82,8 +82,6 @@ namespace msakac_zadaca_3.Aplikacija
             NaredbaCreator objekt = new NaredbeConcreteCreator();
             foreach ((string grupa, string komanda, int index) in listaRegexGrupaIVrijednosti)
             {
-                //Ispisi virtualno vrijeme prije izvrsavanja naredbe
-                proxy.IspisiVirtualnoVrijeme();
                 // Ako je naredba za prekid rada, postavi prekiniRad na true
                 if (grupa == "prekid_rada" && komanda != "")
                 {
@@ -92,6 +90,7 @@ namespace msakac_zadaca_3.Aplikacija
                 }
                 //Obrada naredbe
                 AbstractNaredba naredba = objekt.KreirajNaredbu(grupa);
+                ispis!.DodajUpis($"Naredba: {komanda}");
                 naredba.IzvrsiNaredbu(komanda);
             }
             //ako je u naredbama bila naredba za prekid rada, prekini rad programa na kraju obrade naredbi

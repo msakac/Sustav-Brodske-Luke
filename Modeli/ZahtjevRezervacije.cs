@@ -43,7 +43,7 @@ namespace msakac_zadaca_3.Modeli
             }
             Rezervacija rezervacija = new Rezervacija(najboljiVez.Id, this.IdBrod, DatumVrijemeOd, DatumVrijemeDo);
             brodskaLuka.listaRezervacija.Add(rezervacija);
-            IspisPoruke.Uspjeh($"Zahtjev za rezervaciju | Brod {this.IdBrod} je rezervirao optimalan vez {najboljiVez.Id} od {this.DatumVrijemeOd} do {DatumVrijemeDo} ");
+            brodskaLuka.ispis!.DodajUpis($"Zahtjev za rezervaciju | Brod {this.IdBrod} je rezervirao optimalan vez {najboljiVez.Id} od {this.DatumVrijemeOd} do {DatumVrijemeDo} ");
         }
     }
 }

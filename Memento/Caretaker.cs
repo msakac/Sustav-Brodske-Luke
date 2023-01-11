@@ -8,18 +8,19 @@ namespace msakac_zadaca_3.Memento
 
         public void dodaj(string naziv, Stanje stanje)
         {
+            BrodskaLuka brodskaLuka = BrodskaLuka.Instanca();
             if (pretraziKljuceve(naziv) != null)
             {
                 throw new Exception($"Stanje sa nazivom {naziv} vec postoji u listi spremljenih stanja");
             }
             listaStanja.Add(new KeyValuePair<string, Stanje>(naziv, stanje));
-            IspisPoruke.Uspjeh($"Spremljeno trenutno stanje svih vezova u trenutku virtualnog vremena nazivom: {naziv}");
+            brodskaLuka.ispis!.DodajUpis($"Spremljeno trenutno stanje svih vezova u trenutku virtualnog vremena nazivom: {naziv}");
         }
 
         public Stanje? dohvati(string naziv)
         {
             Stanje? stanje = pretraziKljuceve(naziv);
-            if(stanje == null)
+            if (stanje == null)
             {
                 throw new Exception($"Stanje sa nazivom {naziv} ne postoji u listi spremljenih stanja");
             }

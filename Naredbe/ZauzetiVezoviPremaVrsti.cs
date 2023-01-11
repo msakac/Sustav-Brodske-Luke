@@ -8,6 +8,7 @@ namespace msakac_zadaca_3.Naredbe
     {
         public override void IzvrsiNaredbu(string naredba)
         {
+            BrodskaLuka brodskaLuka = BrodskaLuka.Instanca();
             string[]? argumenti = naredba.Split(' ');
             string argumentDatumVrijeme = argumenti[1] + " " + argumenti[2];
             DateTime datumVrijemeProvjere = DateTime.Parse(argumentDatumVrijeme);
@@ -27,13 +28,13 @@ namespace msakac_zadaca_3.Naredbe
             IspisiTablicu(ostali, "ostalih", datumVrijemeProvjere);
 
             int ukupno = putnicki.Count + poslovni.Count + ostali.Count;
-            IspisPoruke.Uspjeh($"Ukupno zauzetih vezova u {datumVrijemeProvjere} je {ukupno}");
+            brodskaLuka.ispis!.DodajUpis($"Ukupno zauzetih vezova u {datumVrijemeProvjere} je {ukupno}");
         }
 
         private void IspisiTablicu(List<Vez> lista, string vrstaVeza, DateTime vrijeme)
         {
             List<string[]> listaPodatakaZaIspis = new List<string[]>();
-            if(lista.Count == 0)
+            if (lista.Count == 0)
             {
                 IspisPoruke.Greska($"Nema zauzetih {vrstaVeza} vezova u {vrijeme}");
                 return;

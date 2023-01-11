@@ -57,7 +57,7 @@ namespace msakac_zadaca_3.Naredbe
             Rezervacija rezervacija = new Rezervacija(najboljiVez.Id, brod.Id, DatumVrijemeOd, DatumVrijemeDo);
             brodskaLuka.listaRezervacija.Add(rezervacija);
             poruka = $"Zahtjev za privez | Brod {brod.Id} koji nema rezervirani vez trazi privez na optimalan vez {najboljiVez.Id} od {DatumVrijemeOd} do {DatumVrijemeDo}";
-            IspisPoruke.Uspjeh(poruka);
+            brodskaLuka.ispis!.DodajUpis(poruka);
             brod.aktivniKanal.PosaljiPorukuBrodovima(poruka, brod);
             brodskaLuka.listaStavkiDnevnika.Add(new StavkaDnevnika(brod, true, DatumVrijemeOd, poruka));
 

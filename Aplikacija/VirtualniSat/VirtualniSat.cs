@@ -26,7 +26,7 @@ namespace msakac_zadaca_3.Aplikacija
             return this.vrijeme;
         }
         public override void IspisiVirtualnoVrijeme(){
-            Console.WriteLine($"Virtualni sat: {this.vrijeme}");
+            Console.Write($"=====> Virtualni sat: {this.vrijeme}");
         }
     }
 }

@@ -6,6 +6,7 @@ namespace msakac_zadaca_3.Aplikacija
         private Boolean Zaglavlje = false;
         private Boolean Podnozje = false;
         private Boolean RedniBroj = false;
+        private BrodskaLuka brodskaLuka = BrodskaLuka.Instanca();
         public static Tablica Instanca
         {
             get
@@ -34,8 +35,8 @@ namespace msakac_zadaca_3.Aplikacija
                     RedniBroj = !RedniBroj;
                 }
             }
-            IspisPoruke.Uspjeh($"Ispis tablica sa elementima: \n\tZaglavlje: " +
-                $"{VratiVrijednost(Zaglavlje)}, \n\tPodnozje: {VratiVrijednost(Podnozje)}, \n\tRedni broj: {VratiVrijednost(RedniBroj)} ");
+            brodskaLuka.ispis!.DodajUpis($"Konfiguracija tablica: Zaglavlje: " +
+                $"{VratiVrijednost(Zaglavlje)}, Podnozje: {VratiVrijednost(Podnozje)}, Redni broj: {VratiVrijednost(RedniBroj)} ");
         }
 
         public void IspisiTablicu(string nazivTablice, string[] naziviStupaca, List<String[]> podaci, int sirinaStupca = 25)
@@ -72,13 +73,13 @@ namespace msakac_zadaca_3.Aplikacija
             //Ispisujem zaglavlje ako je aktivan
             if (Zaglavlje)
             {
-                IspisPoruke.Uspjeh(linija);
+                brodskaLuka.ispis!.DodajUpis(linija);
                 string ispisNaslovaTablice = String.Format("|{0}|", centrirajIspis(nazivTablice, brojZnakovaZaNaslov));
                 IspisPoruke.PorukaKanala(ispisNaslovaTablice);
-                IspisPoruke.Uspjeh(linija);
+                brodskaLuka.ispis!.DodajUpis(linija);
                 string ispisNaslovaRedaka = String.Format(formatRedka, naziviStupaca);
-                IspisPoruke.Uspjeh(ispisNaslovaRedaka);
-                IspisPoruke.Uspjeh(linija);
+                brodskaLuka.ispis!.DodajUpis(ispisNaslovaRedaka);
+                brodskaLuka.ispis!.DodajUpis(linija);
             }
             //Ispis svih podataka
             int brojac = 0;
@@ -92,7 +93,7 @@ namespace msakac_zadaca_3.Aplikacija
                 }
                 try
                 {
-                    IspisPoruke.Uspjeh(string.Format(formatRedka, redakZaIspis));
+                    brodskaLuka.ispis!.DodajUpis(string.Format(formatRedka, redakZaIspis));
                 }
                 catch (Exception e)
                 {
@@ -104,10 +105,10 @@ namespace msakac_zadaca_3.Aplikacija
             //ispis podnozja ako je aktivan
             if (Podnozje)
             {
-                IspisPoruke.Uspjeh(linija);
+                brodskaLuka.ispis!.DodajUpis(linija);
                 string IspisPodnozjaTablice = String.Format("|{0}|", centrirajIspis($"Ukupan broj podataka: {brojac}", brojZnakovaZaNaslov));
                 IspisPoruke.PorukaKanala(IspisPodnozjaTablice);
-                IspisPoruke.Uspjeh(linija);
+                brodskaLuka.ispis!.DodajUpis(linija);
             }
         }
 
@@ -129,11 +130,11 @@ namespace msakac_zadaca_3.Aplikacija
         {
             if (b)
             {
-                return "Uključeno";
+                return "ON";
             }
             else
             {
-                return "Isključeno";
+                return "OFF";
             }
         }
     }

@@ -51,7 +51,7 @@ namespace msakac_zadaca_3.Modeli
             // ako je sve ok, spoji brod na kanal
             this.SpojeniBrodovi.Add(brod);
             brodskaLuka.listaBrodova.First(b => b.Id == brod.Id).aktivniKanal = this;
-            IspisPoruke.Uspjeh($"Brod sa ID-om {brod.Id} je uspjesno spojen na kanal sa frekvencijom {this.Frekvecija}");
+            brodskaLuka.ispis!.DodajUpis($"Brod sa ID-om {brod.Id} je uspjesno spojen na kanal sa frekvencijom {this.Frekvecija}");
         }
 
         public void OdjaviBrodSaKanala(Brod brod)
@@ -69,7 +69,7 @@ namespace msakac_zadaca_3.Modeli
             // ako postoji, makni ga iz liste i azuriraj u listi brodova
             this.SpojeniBrodovi.Remove(b);
             brodskaLuka.listaBrodova.First(b => b.Id == brod.Id).aktivniKanal = null;
-            IspisPoruke.Uspjeh($"Brod sa ID-om {brod.Id} je odjavljen sa kanala sa frekvencijom {this.Frekvecija}");
+            brodskaLuka.ispis!.DodajUpis($"Brod sa ID-om {brod.Id} je odjavljen sa kanala sa frekvencijom {this.Frekvecija}");
         }
 
         public void PosaljiPorukuBrodovima(string poruka, Brod brod)

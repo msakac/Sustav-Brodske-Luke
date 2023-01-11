@@ -41,7 +41,7 @@ class Zadaca1
         {
             try
             {
-                Console.Write("\nNaredba: ");
+                brodskaLuka.ispis!.PorukaNaredbe();
                 naredba = Console.ReadLine();
                 regex = new Regex(_regexNaredba);
                 match = regex.Match(naredba!);

@@ -19,7 +19,7 @@ namespace msakac_zadaca_3.Naredbe
             brodskaLuka.listaRezervacija = originator.listaRezervacija!;
             Console.WriteLine(brodskaLuka.listaRezervacija.Count);
             proxy.Postavi(originator.virtualnoVrijeme);
-            IspisPoruke.Uspjeh($"Vraceno spremljeno stanje pod nazivom {nazivStanja} i virtualnim vremenom {originator.virtualnoVrijeme}");
+            brodskaLuka.ispis!.DodajUpis($"Vraceno spremljeno stanje pod nazivom {nazivStanja} i virtualnim vremenom {originator.virtualnoVrijeme}");
         }
     }
 }
