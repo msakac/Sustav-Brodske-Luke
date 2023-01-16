@@ -4,7 +4,6 @@ using msakac_zadaca_3.Aplikacija;
 namespace msakac_zadaca_3.Memento
 {
 
-    // Predstavlja Memento klasu
     public class Originator
     {
         public DateTime virtualnoVrijeme { get; set; }

@@ -26,7 +26,6 @@ namespace msakac_zadaca_3.VlastitaFunkcionalnost
                 string nazivIspisa = $"Lista svih priveza u dnevniku rada";
                 string[] naziviStupaca = { "Brod ID", "Naziv Broda", "Vrijeme zahtjeva", "Status" };
                 Tablica.Instanca.IspisiTablicu(nazivIspisa, naziviStupaca, listaPodatakaZaIspis, 20);
-                Console.WriteLine("\n");
             }
             else
             {

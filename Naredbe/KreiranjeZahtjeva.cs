@@ -37,7 +37,7 @@ namespace msakac_zadaca_3.Naredbe
             if (rp != null)
             {
                 poruka = $"Brod sa ID-om {brod.Id} već ima vez u rezervaciji ({rp.IdVez}) od {rp.DatumVrijemeOd} do {rp.DatumVrijemeDo}";
-                brodskaLuka.ispis!.DodajGresku(poruka);
+                brodskaLuka.ispis!.DodajUpis(poruka);
                 brod.aktivniKanal.PosaljiPorukuBrodovima(poruka, brod);
                 brodskaLuka.listaStavkiDnevnika.Add(new StavkaDnevnika(brod, false, DatumVrijemeOd, poruka));
                 return;
@@ -49,7 +49,7 @@ namespace msakac_zadaca_3.Naredbe
             if (najboljiVez == null)
             {
                 poruka = $"Trenutno nema slobodnih vezova za brod sa ID-om {brod.Id} u terminu od {DatumVrijemeOd} do {DatumVrijemeDo}";
-                brodskaLuka.ispis!.DodajGresku(poruka);
+                brodskaLuka.ispis!.DodajUpis(poruka);
                 brod.aktivniKanal.PosaljiPorukuBrodovima(poruka, brod);
                 brodskaLuka.listaStavkiDnevnika.Add(new StavkaDnevnika(brod, false, DatumVrijemeOd, poruka));
                 return;

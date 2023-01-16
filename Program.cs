@@ -20,6 +20,7 @@ class Zadaca1
         if (!regex.IsMatch(naredba) || naredba.Length == 0)
         {
             Console.WriteLine("Uneseni argumenti naredbe nisu ispravni");
+            Environment.Exit(0);
         }
         //Dohvatim sve vrijednosti iz unesene naredbe
         List<KeyValuePair<string, string>> listaRegexGrupaIVrijednosti = DohvatiRegexGrupuIVrijednost(regex, match);

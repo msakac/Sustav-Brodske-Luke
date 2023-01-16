@@ -19,7 +19,6 @@ namespace msakac_zadaca_3.VlastitaFunkcionalnost
                 string nazivIspisa = $"Lista svih brodova";
                 string[] naziviStupaca = { "Brod ID", "Oznaka", "Naziv", "Vrsta", "Duljina", "Sirina", "Gaz", "Max brzina", "Max putnika", "Max vozila", "Max tereta" };
                 Tablica.Instanca.IspisiTablicu(nazivIspisa, naziviStupaca, listaPodatakaZaIspis, 14);
-                Console.WriteLine("\n");
             }
             else
             {

@@ -18,7 +18,6 @@ namespace msakac_zadaca_3.VlastitaFunkcionalnost
                 string nazivIspisa = $"Lista svih kanala";
                 string[] naziviStupaca = { "Kanal ID", "Frekvencija", "Max broj" };
                 Tablica.Instanca.IspisiTablicu(nazivIspisa, naziviStupaca, listaPodatakaZaIspis, 12);
-                Console.WriteLine("\n");
             }
             else
             {
